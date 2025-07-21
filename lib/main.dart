@@ -37,14 +37,15 @@ class WayGoApp extends StatelessWidget {
       getPages: AppRoute.routes,
       color: themeColor,
       theme: ThemeData(
-        primaryColor: themeColor,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: themeColor),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: themeColor,
             foregroundColor: Colors.white,
           ),
         ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           selectedItemColor: themeColor,
         ),
       ),
