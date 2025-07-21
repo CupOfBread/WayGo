@@ -1,0 +1,3 @@
+class StampCollectionState {
+  StampCollectionState();
+}

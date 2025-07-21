@@ -1,0 +1,36 @@
+name: waygo
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  flutter_baidu_mapapi_base: ^3.9.5
+  flutter_baidu_mapapi_map: ^3.9.5
+  flutter_baidu_mapapi_utils: ^3.9.5
+  flutter_baidu_mapapi_search: ^3.9.5
+  flutter_bmflocation: ^3.8.0
+  permission_handler: ^12.0.0+1
+
+  get: ^4.7.2
+  logger: ^2.5.0
+  dio: ^5.8.0+1
+  flutter_smart_dialog: ^4.9.8+8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/map_style/baidu_map_style_smoke_rain.sty
