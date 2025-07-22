@@ -4,6 +4,7 @@ import 'my_index_logic.dart';
 import '../stamp_collection/stamp_collection_view.dart';
 import '../ticket_album/ticket_album_view.dart';
 import '../../login/login_view.dart';
+import 'my_footprint_page.dart';
 
 class MyIndexPage extends StatelessWidget {
   MyIndexPage({Key? key}) : super(key: key);
@@ -36,6 +37,13 @@ class MyIndexPage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          ListTile(
+            leading: Icon(Icons.travel_explore),
+            title: Text('我的足迹'),
+            onTap: () {
+              Get.to(() => const MyFootprintPage());
+            },
           ),
           ListTile(
             leading: Icon(Icons.collections_bookmark),

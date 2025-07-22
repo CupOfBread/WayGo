@@ -69,8 +69,14 @@ class _TicketAlbumPageState extends State<TicketAlbumPage> {
               isClickable: true,
               detailItemBuilder: (index) => const ShowTicket(),
             ),
-            _buildTicketList(_trainTicketCount, (context, index) => const TrainTicket()),
-            _buildTicketList(_boardingPassCount, (context, index) => const BoardingPass()),
+            _buildTicketList(
+              _trainTicketCount,
+              (context, index) => const TrainTicket(),
+            ),
+            _buildTicketList(
+              _boardingPassCount,
+              (context, index) => const BoardingPass(),
+            ),
           ],
         ),
       ),
@@ -88,17 +94,23 @@ class _TicketAlbumPageState extends State<TicketAlbumPage> {
       itemBuilder: (context, index) {
         return Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 16.0,
+            ),
             child: GestureDetector(
-              onTap: isClickable
-                  ? () {
-                      Get.to(() => TicketDetailPage(
+              onTap:
+                  isClickable
+                      ? () {
+                        Get.to(
+                          () => TicketDetailPage(
                             initialIndex: index,
                             ticketCount: count,
                             ticketBuilder: (i) => detailItemBuilder!(i),
-                          ));
-                    }
-                  : null,
+                          ),
+                        );
+                      }
+                      : null,
               child: itemBuilder(context, index),
             ),
           ),
