@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:waygo/pages/my/ticket_album/ticket_detail/ticket_detail_page.dart';
-import 'package:waygo/pages/my/ticket_album/widget/boarding_pass.dart';
-import 'package:waygo/pages/my/ticket_album/widget/movie_ticket.dart';
-import 'package:waygo/pages/my/ticket_album/widget/show_ticket.dart';
-import 'package:waygo/pages/my/ticket_album/widget/train_ticket.dart';
+import 'package:waygo/pages/my/ticket_album/ticket_widgets/boarding_pass.dart';
+import 'package:waygo/pages/my/ticket_album/ticket_widgets/movie_ticket.dart';
+import 'package:waygo/pages/my/ticket_album/ticket_widgets/show_ticket.dart';
+import 'package:waygo/pages/my/ticket_album/ticket_widgets/train_ticket.dart';
 import 'ticket_album_logic.dart';
 
 class TicketAlbumPage extends StatefulWidget {

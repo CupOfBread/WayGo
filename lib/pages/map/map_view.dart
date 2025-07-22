@@ -53,7 +53,7 @@ class MapPage extends StatelessWidget {
               final lng = logic.longitude.value;
               final alt = logic.altitude.value;
               return Card(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withAlpha((0.9 * 255).toInt()),
                 elevation: 4,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
