@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final LoginLogic logic = Get.put(LoginLogic());
-
   final LoginState state = Get.find<LoginLogic>().state;
   final TextEditingController _usernameController = TextEditingController(
     text: 'taoban11',
@@ -22,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController(
     text: '123456',
   );
-
   DateTime? _lastPressed;
 
   @override
@@ -42,36 +40,88 @@ class _LoginPageState extends State<LoginPage> {
         SystemNavigator.pop();
       },
       child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(labelText: '用户名'),
+        backgroundColor: Colors.grey[100],
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Card(
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(labelText: '密码'),
-                  obscureText: true,
-                ),
-                const SizedBox(height: 32),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      logic.login(
-                        _usernameController.text,
-                        _passwordController.text,
-                      );
-                    },
-                    child: const Text('登录'),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 8),
+                      Text(
+                        '登录',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(255, 111, 0, 1),
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      TextField(
+                        controller: _usernameController,
+                        decoration: InputDecoration(
+                          labelText: '用户名',
+                          labelStyle: TextStyle(color: Color.fromRGBO(255, 111, 0, 1)),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(255, 111, 0, 1)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(255, 111, 0, 1), width: 2),
+                          ),
+                        ),
+                        cursorColor: Color.fromRGBO(255, 111, 0, 1),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          labelText: '密码',
+                          labelStyle: TextStyle(color: Color.fromRGBO(255, 111, 0, 1)),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(255, 111, 0, 1)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(255, 111, 0, 1), width: 2),
+                          ),
+                        ),
+                        obscureText: true,
+                        cursorColor: Color.fromRGBO(255, 111, 0, 1),
+                      ),
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            backgroundColor: Color.fromRGBO(255, 111, 0, 1),
+                          ),
+                          onPressed: () {
+                            logic.login(
+                              _usernameController.text,
+                              _passwordController.text,
+                            );
+                          },
+                          child: const Text(
+                            '登录',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),

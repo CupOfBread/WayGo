@@ -8,7 +8,7 @@ class BottomNavBarState {
 
   List<NavItem> bottomNavItemList = [
     NavItem(name: '首页', icon: Icons.home_filled),
-    NavItem(name: '我', icon: Icons.person),
+    NavItem(name: '我的', icon: Icons.person),
   ];
 }
 
