@@ -26,10 +26,10 @@ class _TicketAlbumPageState extends State<TicketAlbumPage> {
   void initState() {
     super.initState();
     final random = Random();
-    _movieTicketCount = random.nextInt(3) + 1;
-    _showTicketCount = random.nextInt(3) + 1;
-    _trainTicketCount = random.nextInt(3) + 1;
-    _boardingPassCount = random.nextInt(3) + 1;
+    _movieTicketCount = random.nextInt(3) + 2;
+    _showTicketCount = random.nextInt(3) + 2;
+    _trainTicketCount = random.nextInt(3) + 2;
+    _boardingPassCount = random.nextInt(3) + 2;
     Get.put(TicketAlbumLogic());
   }
 
