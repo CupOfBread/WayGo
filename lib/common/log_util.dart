@@ -1,25 +1,48 @@
 import 'package:logger/logger.dart';
+import 'dart:convert';
+import 'json_util.dart';
 
 class LogUtil {
   static final Logger _logger = Logger(
     printer: PrettyPrinter(
       methodCount: 0,
+      colors: true,
+      printEmojis: true,
+      printTime: true,
     ),
   );
 
-  static void debug(Object msg) {
-    _logger.d("${DateTime.now().toString()}\n$msg");
+  /// info级别日志
+  static void info(dynamic msg, {String? tag}) {
+    _logger.i(_wrap(msg, tag));
   }
 
-  static void info(Object msg) {
-    _logger.i("${DateTime.now().toString()}\n$msg");
+  /// debug级别日志
+  static void debug(dynamic msg, {String? tag}) {
+    _logger.d(_wrap(msg, tag));
   }
 
-  static void warn(Object msg) {
-    _logger.w("${DateTime.now().toString()}\n$msg");
+  /// warn级别日志
+  static void warn(dynamic msg, {String? tag}) {
+    _logger.w(_wrap(msg, tag));
   }
 
-  static void error(Object msg) {
-    _logger.e("${DateTime.now().toString()}\n$msg");
+  /// error级别日志
+  static void error(dynamic msg, {String? tag}) {
+    _logger.e(_wrap(msg, tag));
+  }
+
+  /// 自动对象转json，带tag
+  static String _wrap(dynamic msg, String? tag) {
+    String content;
+    if (msg is String) {
+      content = msg;
+    } else {
+      content = JsonUtil.encode(msg);
+    }
+    if (tag != null && tag.isNotEmpty) {
+      return '[$tag] $content';
+    }
+    return content;
   }
 }

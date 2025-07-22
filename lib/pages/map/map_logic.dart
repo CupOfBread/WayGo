@@ -6,6 +6,11 @@ import 'map_state.dart';
 class MapLogic extends GetxController {
   final MapState state = MapState();
 
+  // 新增：响应式经纬度
+  final RxDouble latitude = 0.0.obs;
+  final RxDouble longitude = 0.0.obs;
+  final RxDouble altitude = 0.0.obs;
+
   BaiduLocationAndroidOption initAndroidOptions() {
     BaiduLocationAndroidOption options = BaiduLocationAndroidOption(
       // 定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
@@ -60,18 +65,17 @@ class MapLogic extends GetxController {
   }
 
   Future<void> startLocating() async {
-    LogUtil.info("===开始定位===");
     Map androidMap = initAndroidOptions().getMap();
     Map iosMap = initIOSOptions().getMap();
     state.myLocPlugin.setAgreePrivacy(true);
     state.myLocPlugin.seriesLocationCallback(
       callback: (BaiduLocation result) {
-        LogUtil.info(result.altitude as Object);
-        LogUtil.info(result.latitude as Object);
+        latitude.value = result.latitude ?? 0.0;
+        longitude.value = result.longitude ?? 0.0;
+        altitude.value = result.altitude ?? 0.0;
       },
     );
     await state.myLocPlugin.prepareLoc(androidMap, iosMap);
     await state.myLocPlugin.startLocation();
-    LogUtil.info("===开始定位====");
   }
 }

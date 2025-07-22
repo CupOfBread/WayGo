@@ -24,19 +24,54 @@ class MapPage extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(title: const Text('地图页面')),
-      body: BMFMapWidget(
-        mapOptions: mapOptions,
-        onBMFMapCreated: (controller) {
-          controller.setMapDidLoadCallback(
-            callback: () {
-              controller.setCustomMapStyle(
-                'assets/map_style/baidu_map_style_smoke_rain.sty',
-                0,
+      body: Stack(
+        children: [
+          BMFMapWidget(
+            mapOptions: mapOptions,
+            onBMFMapCreated: (controller) {
+              controller.setMapDidLoadCallback(
+                callback: () {
+                  controller.setCustomMapStyle(
+                    'assets/map_style/baidu_map_style_smoke_rain.sty',
+                    0,
+                  );
+                  controller.setCustomMapStyleEnable(true);
+                },
               );
-              controller.setCustomMapStyleEnable(true);
             },
-          );
-        },
+          ),
+          Positioned(
+            top: 16,
+            left: 16,
+            right: 16,
+            child: Obx(() {
+              final lat = logic.latitude.value;
+              final lng = logic.longitude.value;
+              final alt = logic.altitude.value;
+              return Card(
+                color: Colors.white.withOpacity(0.9),
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '当前位置：${lat == 0.0 && lng == 0.0 ? '--' : '${lat.toStringAsFixed(6)}, ${lng.toStringAsFixed(6)}'}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '当前海拔：${alt == 0.0 ? '--' : '${alt.toStringAsFixed(2)} m'}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
