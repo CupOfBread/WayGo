@@ -33,4 +33,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/map_style/baidu_map_style_smoke_rain.sty
+    - assets/map_style/

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
-import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:get/get.dart';
-import '../../common/log_util.dart';
 import 'map_logic.dart';
 import 'map_state.dart';
 
@@ -32,10 +30,16 @@ class MapPage extends StatelessWidget {
               controller.setMapDidLoadCallback(
                 callback: () {
                   controller.setCustomMapStyle(
-                    'assets/map_style/baidu_map_style_smoke_rain.sty',
+                    'assets/map_style/smoke_rain.sty',
                     0,
                   );
                   controller.setCustomMapStyleEnable(true);
+                },
+              );
+              controller.setMapOnLongClickCallback(
+                callback: (BMFCoordinate coordinate) {
+                  logic.pickedLatitude.value = coordinate.latitude;
+                  logic.pickedLongitude.value = coordinate.longitude;
                 },
               );
             },
@@ -64,6 +68,12 @@ class MapPage extends StatelessWidget {
                       Text(
                         '当前海拔：${alt == 0.0 ? '--' : '${alt.toStringAsFixed(2)} m'}',
                         style: const TextStyle(fontSize: 14),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '选点坐标：'
+                        '${logic.pickedLatitude.value == 0.0 && logic.pickedLongitude.value == 0.0 ? '--' : '${logic.pickedLatitude.value.toStringAsFixed(6)}, ${logic.pickedLongitude.value.toStringAsFixed(6)}'}',
+                        style: const TextStyle(fontSize: 14, color: Colors.blue),
                       ),
                     ],
                   ),

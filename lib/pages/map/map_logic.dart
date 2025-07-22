@@ -1,6 +1,5 @@
 import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:get/get.dart';
-import '../../common/log_util.dart';
 import 'map_state.dart';
 
 class MapLogic extends GetxController {
@@ -10,6 +9,10 @@ class MapLogic extends GetxController {
   final RxDouble latitude = 0.0.obs;
   final RxDouble longitude = 0.0.obs;
   final RxDouble altitude = 0.0.obs;
+
+  // 新增：响应式选点坐标
+  final RxDouble pickedLatitude = 0.0.obs;
+  final RxDouble pickedLongitude = 0.0.obs;
 
   BaiduLocationAndroidOption initAndroidOptions() {
     BaiduLocationAndroidOption options = BaiduLocationAndroidOption(
