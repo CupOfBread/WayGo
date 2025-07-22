@@ -133,6 +133,16 @@ class HomePage extends StatelessWidget {
                             Get.toNamed('/login');
                           },
                         ),
+                        _buildHomeCard(
+                          icon: Icons.radio,
+                          text: '收音机',
+                          color1: Color(0xFFffb347),
+                          color2: Color(0xFFffcc33),
+                          boxShadowColor: Colors.orangeAccent,
+                          onTap: () {
+                            Get.toNamed('/radio');
+                          },
+                        ),
                       ],
                     ),
                   ],

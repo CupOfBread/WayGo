@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:waygo/pages/login/login_view.dart';
 import 'package:waygo/pages/my/my_index/my_index_view.dart';
 import 'package:waygo/pages/my/about/about_page.dart';
+import 'package:waygo/pages/radio/radio_view.dart';
 
 import '../pages/home/home_view.dart';
 import '../pages/root/root_binding.dart';
@@ -16,6 +17,7 @@ class AppRoute {
   static const String my = '/my';
   static const String about = '/about';
   static const String spotDetail = '/spotDetail';
+  static const String radio = '/radio';
 
   static final routes = [
     GetPage(name: root, page: () => RootPage(), binding: RootBinding()),
@@ -24,5 +26,6 @@ class AppRoute {
     GetPage(name: my, page: () => MyIndexPage()),
     GetPage(name: about, page: () => AboutPage()),
     GetPage(name: spotDetail, page: () => const SpotDetailPage()),
+    GetPage(name: radio, page: () => const RadioPage()),
   ];
 }
