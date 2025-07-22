@@ -17,74 +17,123 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF5F6FA),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 48.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
-                child: Wrap(
-                  spacing: 24,
-                  runSpacing: 24,
-                  alignment: WrapAlignment.center,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildHomeCard(
-                      icon: Icons.card_travel,
-                      text: '旅程详情',
-                      color1: Color(0xFFFFA726),
-                      color2: Color(0xFFFF7043),
-                      boxShadowColor: Colors.orange,
-                      onTap: () {
-                        Get.to(
-                          () => DefaultTabController(
-                            length: 3,
-                            child: TravelPage(),
-                          ),
-                        );
-                      },
+                    Wrap(
+                      spacing: 24,
+                      runSpacing: 24,
+                      alignment: WrapAlignment.start,
+                      children: [
+                        _buildHomeCard(
+                          icon: Icons.card_travel,
+                          text: '旅程详情',
+                          color1: Color(0xFFFFA726),
+                          color2: Color(0xFFFF7043),
+                          boxShadowColor: Colors.orange,
+                          onTap: () {
+                            Get.to(
+                              () => DefaultTabController(
+                                length: 3,
+                                child: TravelPage(),
+                              ),
+                            );
+                          },
+                        ),
+                        _buildHomeCard(
+                          icon: Icons.map,
+                          text: '地图',
+                          color1: Color(0xFF42A5F5),
+                          color2: Color(0xFF1976D2),
+                          boxShadowColor: Colors.blue,
+                          onTap: () {
+                            Get.to(() => const MapPage());
+                          },
+                        ),
+                        _buildHomeCard(
+                          icon: Icons.park,
+                          text: '景点详情',
+                          color1: Color(0xFF66BB6A),
+                          color2: Color(0xFF43A047),
+                          boxShadowColor: Colors.green,
+                          onTap: () {
+                            Get.to(() => const SpotDetailPage());
+                          },
+                        ),
+                      ],
                     ),
-                    _buildHomeCard(
-                      icon: Icons.map,
-                      text: '地图',
-                      color1: Color(0xFF42A5F5),
-                      color2: Color(0xFF1976D2),
-                      boxShadowColor: Colors.blue,
-                      onTap: () {
-                        Get.to(() => const MapPage());
-                      },
+                    const SizedBox(height: 24),
+                    Container(
+                      width: 340,
+                      child: Divider(
+                        color: Color(0xFFE0E0E0),
+                        thickness: 1,
+                      ),
                     ),
-                    _buildHomeCard(
-                      icon: Icons.park,
-                      text: '景点详情',
-                      color1: Color(0xFF66BB6A),
-                      color2: Color(0xFF43A047),
-                      boxShadowColor: Colors.green,
-                      onTap: () {
-                        Get.to(() => const SpotDetailPage());
-                      },
+                    const SizedBox(height: 24),
+                    Wrap(
+                      spacing: 24,
+                      runSpacing: 24,
+                      alignment: WrapAlignment.start,
+                      children: [
+                        _buildHomeCard(
+                          icon: Icons.storefront,
+                          text: '店铺详情',
+                          color1: Color(0xFFEC407A),
+                          color2: Color(0xFFAB47BC),
+                          boxShadowColor: Colors.purple,
+                          onTap: () {
+                            Get.to(() => const StoreDetailPage());
+                          },
+                        ),
+                        _buildHomeCard(
+                          icon: Icons.view_module,
+                          text: '店铺列表',
+                          color1: Color(0xFF6a85b6),
+                          color2: Color(0xFFbac8e0),
+                          boxShadowColor: Colors.blueGrey,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => const StoreListPage()),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                    _buildHomeCard(
-                      icon: Icons.storefront,
-                      text: '店铺详情',
-                      color1: Color(0xFFEC407A),
-                      color2: Color(0xFFAB47BC),
-                      boxShadowColor: Colors.purple,
-                      onTap: () {
-                        Get.to(() => const StoreDetailPage());
-                      },
+                    const SizedBox(height: 24),
+                    Container(
+                      width: 340,
+                      child: Divider(
+                        color: Color(0xFFE0E0E0),
+                        thickness: 1,
+                      ),
                     ),
-                    _buildHomeCard(
-                      icon: Icons.view_module,
-                      text: '店铺列表',
-                      color1: Color(0xFF6a85b6), // 新的渐变色起点
-                      color2: Color(0xFFbac8e0), // 新的渐变色终点
-                      boxShadowColor: Colors.blueGrey,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const StoreListPage()),
-                        );
-                      },
+                    const SizedBox(height: 24),
+                    Wrap(
+                      spacing: 24,
+                      runSpacing: 24,
+                      alignment: WrapAlignment.start,
+                      children: [
+                        _buildHomeCard(
+                          icon: Icons.login,
+                          text: '登录页',
+                          color1: Color(0xFF43cea2),
+                          color2: Color(0xFF185a9d),
+                          boxShadowColor: Colors.teal,
+                          onTap: () {
+                            Get.toNamed('/login');
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -33,7 +33,7 @@ class WayGoApp extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
-      initialRoute: '/login',
+      initialRoute: '/root',
       getPages: AppRoute.routes,
       color: themeColor,
       theme: ThemeData(
