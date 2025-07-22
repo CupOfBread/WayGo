@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:waygo/pages/store/store_detail/store_detail_view.dart';
+import '../store/store_list_view.dart';
 import 'home_logic.dart';
 import 'home_state.dart';
 import '../map/map_view.dart';
@@ -29,15 +31,17 @@ class HomePage extends StatelessWidget {
                   children: [
                     _buildHomeCard(
                       icon: Icons.card_travel,
-                      text: '旅行',
+                      text: '旅程详情',
                       color1: Color(0xFFFFA726),
                       color2: Color(0xFFFF7043),
                       boxShadowColor: Colors.orange,
                       onTap: () {
-                        Get.to(() => DefaultTabController(
-                              length: 3,
-                              child: TravelPage(),
-                            ));
+                        Get.to(
+                          () => DefaultTabController(
+                            length: 3,
+                            child: TravelPage(),
+                          ),
+                        );
                       },
                     ),
                     _buildHomeCard(
@@ -58,6 +62,28 @@ class HomePage extends StatelessWidget {
                       boxShadowColor: Colors.green,
                       onTap: () {
                         Get.to(() => const SpotDetailPage());
+                      },
+                    ),
+                    _buildHomeCard(
+                      icon: Icons.storefront,
+                      text: '店铺详情',
+                      color1: Color(0xFFEC407A),
+                      color2: Color(0xFFAB47BC),
+                      boxShadowColor: Colors.purple,
+                      onTap: () {
+                        Get.to(() => const StoreDetailPage());
+                      },
+                    ),
+                    _buildHomeCard(
+                      icon: Icons.view_module,
+                      text: '店铺列表',
+                      color1: Color(0xFF6a85b6), // 新的渐变色起点
+                      color2: Color(0xFFbac8e0), // 新的渐变色终点
+                      boxShadowColor: Colors.blueGrey,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const StoreListPage()),
+                        );
                       },
                     ),
                   ],
@@ -105,7 +131,14 @@ Widget _buildHomeCard({
         children: [
           Icon(icon, size: 36, color: Colors.white),
           SizedBox(height: 12),
-          Text(text, style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     ),

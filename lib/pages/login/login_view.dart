@@ -108,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           onPressed: () {
                             logic.login(
+                              context,
                               _usernameController.text,
                               _passwordController.text,
                             );
