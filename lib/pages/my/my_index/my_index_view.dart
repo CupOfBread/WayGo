@@ -5,6 +5,7 @@ import '../stamp_collection/stamp_collection_view.dart';
 import '../ticket_album/ticket_album_view.dart';
 import '../../login/login_view.dart';
 import '../my_footprint/my_footprint_page.dart';
+import '../about/about_page.dart';
 
 class MyIndexPage extends StatelessWidget {
   MyIndexPage({Key? key}) : super(key: key);
@@ -42,9 +43,15 @@ class MyIndexPage extends StatelessWidget {
                     backgroundImage: AssetImage('assets/avatar.jpg'),
                   ),
                   SizedBox(height: 16),
-                  const Text('taoban11', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const Text(
+                    'taoban11',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(height: 8),
-                  const Text('这个人很懒，什么都没有写', style: TextStyle(color: Colors.grey)),
+                  const Text(
+                    '这个人很懒，什么都没有写',
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ],
               ),
             ),
@@ -91,6 +98,13 @@ class MyIndexPage extends StatelessWidget {
                     ),
                     _MyDivider(),
                     _MyListTile(
+                      icon: Icons.info_outline,
+                      iconColor: Color(0xFF1976D2),
+                      title: '关于',
+                      onTap: () => Get.to(() => const AboutPage()),
+                    ),
+                    _MyDivider(),
+                    _MyListTile(
                       icon: Icons.exit_to_app,
                       iconColor: Colors.redAccent,
                       title: '退出登录',
@@ -124,7 +138,14 @@ class _MyListTile extends StatelessWidget {
   final Color iconColor;
   final String title;
   final VoidCallback onTap;
-  const _MyListTile({required this.icon, required this.iconColor, required this.title, required this.onTap});
+
+  const _MyListTile({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.onTap,
+  });
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -136,9 +157,12 @@ class _MyListTile extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: Icon(icon, color: iconColor, size: 28),
       ),
-      title: Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+      title: Text(
+        title,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      ),
       trailing: Icon(Icons.chevron_right, color: Colors.grey),
       onTap: onTap,
     );
   }
-} 
+}

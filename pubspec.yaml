@@ -23,6 +23,7 @@ dependencies:
   logger: ^2.5.0
   dio: ^5.8.0+1
   flutter_smart_dialog: ^4.9.8+8
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
