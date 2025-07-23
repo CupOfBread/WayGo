@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../showcase/showcase_view.dart';
 import 'my_index_logic.dart';
 import '../stamp_collection/stamp_collection_view.dart';
 import '../ticket_album/ticket_album_view.dart';
@@ -82,6 +83,13 @@ class MyIndexPage extends StatelessWidget {
                       iconColor: Color(0xFF1976D2),
                       title: '个人主页',
                       onTap: () => Get.to(() => const MyProfilePage()),
+                    ),
+                    _MyDivider(),
+                    _MyListTile(
+                      icon: Icons.cases_rounded,
+                      iconColor: Color(0xFF1976D2),
+                      title: '展示柜',
+                      onTap: () => Get.to(() => ShowcasePage()),
                     ),
                     _MyDivider(),
                     _MyListTile(
