@@ -1,5 +1,4 @@
 class RootState {
-  RootState() {
-    ///Initialize variables
-  }
+  DateTime? lastPressed;
+  RootState();
 }

@@ -1,27 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'login_logic.dart';
 import 'login_state.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   final LoginLogic logic = Get.put(LoginLogic());
   final LoginState state = Get.find<LoginLogic>().state;
-  final TextEditingController _usernameController = TextEditingController(
-    text: 'taoban11',
-  );
-  final TextEditingController _passwordController = TextEditingController(
-    text: '123456',
-  );
-  DateTime? _lastPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 40),
                 TextField(
-                  controller: _usernameController,
+                  controller: state.usernameController,
                   decoration: const InputDecoration(
                     hintText: '用户名',
                     border: UnderlineInputBorder(
@@ -62,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 24),
                 TextField(
-                  controller: _passwordController,
+                  controller: state.passwordController,
                   decoration: const InputDecoration(
                     hintText: '密码',
                     border: UnderlineInputBorder(
@@ -91,8 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       logic.login(
                         context,
-                        _usernameController.text,
-                        _passwordController.text,
+                        logic.state.usernameController.text,
+                        logic.state.passwordController.text,
                       );
                     },
                     child: const Text(

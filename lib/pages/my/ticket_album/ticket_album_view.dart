@@ -1,37 +1,16 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:waygo/pages/my/ticket_album/ticket_detail/ticket_detail_page.dart';
+import 'package:waygo/pages/my/ticket_album/ticket_detail/ticket_detail_view.dart';
 import 'package:waygo/pages/my/ticket_album/ticket_widgets/boarding_pass.dart';
 import 'package:waygo/pages/my/ticket_album/ticket_widgets/movie_ticket.dart';
 import 'package:waygo/pages/my/ticket_album/ticket_widgets/show_ticket.dart';
 import 'package:waygo/pages/my/ticket_album/ticket_widgets/train_ticket.dart';
 import 'ticket_album_logic.dart';
 
-class TicketAlbumPage extends StatefulWidget {
-  const TicketAlbumPage({super.key});
+class TicketAlbumPage extends StatelessWidget {
+  TicketAlbumPage({super.key});
 
-  @override
-  State<TicketAlbumPage> createState() => _TicketAlbumPageState();
-}
-
-class _TicketAlbumPageState extends State<TicketAlbumPage> {
-  late int _movieTicketCount;
-  late int _showTicketCount;
-  late int _trainTicketCount;
-  late int _boardingPassCount;
-
-  @override
-  void initState() {
-    super.initState();
-    final random = Random();
-    _movieTicketCount = random.nextInt(3) + 2;
-    _showTicketCount = random.nextInt(3) + 2;
-    _trainTicketCount = random.nextInt(3) + 2;
-    _boardingPassCount = random.nextInt(3) + 2;
-    Get.put(TicketAlbumLogic());
-  }
+  final TicketAlbumLogic logic = Get.put(TicketAlbumLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -58,23 +37,23 @@ class _TicketAlbumPageState extends State<TicketAlbumPage> {
         body: TabBarView(
           children: [
             _buildTicketList(
-              _movieTicketCount,
+              logic.movieTicketCount,
               (context, index) => const MovieTicket(),
               isClickable: true,
               detailItemBuilder: (index) => const MovieTicket(),
             ),
             _buildTicketList(
-              _showTicketCount,
+              logic.showTicketCount,
               (context, index) => const ShowTicket(),
               isClickable: true,
               detailItemBuilder: (index) => const ShowTicket(),
             ),
             _buildTicketList(
-              _trainTicketCount,
+              logic.trainTicketCount,
               (context, index) => const TrainTicket(),
             ),
             _buildTicketList(
-              _boardingPassCount,
+              logic.boardingPassCount,
               (context, index) => const BoardingPass(),
             ),
           ],

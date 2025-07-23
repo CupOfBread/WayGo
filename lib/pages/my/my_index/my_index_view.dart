@@ -4,8 +4,8 @@ import 'my_index_logic.dart';
 import '../stamp_collection/stamp_collection_view.dart';
 import '../ticket_album/ticket_album_view.dart';
 import '../../login/login_view.dart';
-import '../my_footprint/my_footprint_page.dart';
-import '../about/about_page.dart';
+import '../my_footprint/my_footprint_view.dart';
+import '../about/about_view.dart';
 
 class MyIndexPage extends StatelessWidget {
   MyIndexPage({Key? key}) : super(key: key);
@@ -94,7 +94,7 @@ class MyIndexPage extends StatelessWidget {
                       icon: Icons.confirmation_num,
                       iconColor: Color(0xFF1976D2),
                       title: '票根纪念册',
-                      onTap: () => Get.to(() => const TicketAlbumPage()),
+                      onTap: () => Get.to(() => TicketAlbumPage()),
                     ),
                     _MyDivider(),
                     _MyListTile(

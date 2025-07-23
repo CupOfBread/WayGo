@@ -6,7 +6,7 @@ import 'home_logic.dart';
 import 'home_state.dart';
 import '../map/map_view.dart';
 import '../travel/travel_view.dart';
-import '../spot/spot_detail_page.dart';
+import '../spot/spot_detail_view.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);

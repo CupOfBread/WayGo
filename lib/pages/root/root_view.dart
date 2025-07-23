@@ -5,30 +5,17 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../../component/bottom_nav_bar/bottom_nav_bar_logic.dart';
 import '../../component/bottom_nav_bar/bottom_nav_bar_view.dart';
-import '../../route/app_route.dart';
 import '../home/home_view.dart';
 import '../my/my_index/my_index_view.dart';
 import 'root_logic.dart';
 import 'root_state.dart';
 
-class RootPage extends StatefulWidget {
+class RootPage extends StatelessWidget {
   RootPage({super.key});
 
-  @override
-  State<RootPage> createState() => _RootPageState();
-}
-
-class _RootPageState extends State<RootPage> {
-  final RootLogic logic = Get.find<RootLogic>();
+  final RootLogic logic = Get.put(RootLogic());
   final RootState state = Get.find<RootLogic>().state;
-  final bottomBarLogic = Get.find<BottomNavBarLogic>();
-
-  DateTime? _lastPressed;
-
-  final List<Widget> _pages = [
-    HomePage(),
-    MyIndexPage(),
-  ];
+  final bottomBarLogic = Get.put(BottomNavBarLogic());
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +26,9 @@ class _RootPageState extends State<RootPage> {
           return;
         }
         DateTime now = DateTime.now();
-        if (_lastPressed == null ||
-            now.difference(_lastPressed!) > const Duration(seconds: 2)) {
-          _lastPressed = now;
+        if (logic.state.lastPressed == null ||
+            now.difference(logic.state.lastPressed!) > const Duration(seconds: 2)) {
+          logic.state.lastPressed = now;
           SmartDialog.dismiss(status: SmartStatus.toast);
           SmartDialog.showToast('再按一次返回键退出');
           return;
@@ -52,7 +39,7 @@ class _RootPageState extends State<RootPage> {
         body: Obx(
           () => IndexedStack(
             index: bottomBarLogic.state.currentIndex.value,
-            children: _pages,
+            children: [HomePage(), MyIndexPage()],
           ),
         ),
         bottomNavigationBar: BottomNavBarComponent(),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:waygo/pages/travel/travel_itinerary/travel_itinerary_page.dart';
-import 'package:waygo/pages/travel/travel_luggage/travel_luggage_page.dart';
+import 'package:waygo/pages/travel/travel_itinerary/travel_itinerary_view.dart';
+import 'package:waygo/pages/travel/travel_luggage/travel_luggage_view.dart';
 import 'package:waygo/common/log_util.dart';
 import 'travel_logic.dart';
-import 'travel_state.dart';
-import 'travel_bill/travel_bill_page.dart';
+import 'travel_bill/travel_bill_view.dart';
 
 class TravelPage extends StatelessWidget {
   const TravelPage({Key? key}) : super(key: key);
