@@ -6,6 +6,7 @@ import '../ticket_album/ticket_album_view.dart';
 import '../../login/login_view.dart';
 import '../my_footprint/my_footprint_view.dart';
 import '../about/about_view.dart';
+import '../my_profile/my_profile_view.dart';
 
 class MyIndexPage extends StatelessWidget {
   MyIndexPage({Key? key}) : super(key: key);
@@ -76,6 +77,13 @@ class MyIndexPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                 child: Column(
                   children: [
+                    _MyListTile(
+                      icon: Icons.person,
+                      iconColor: Color(0xFF1976D2),
+                      title: '个人主页',
+                      onTap: () => Get.to(() => const MyProfilePage()),
+                    ),
+                    _MyDivider(),
                     _MyListTile(
                       icon: Icons.travel_explore,
                       iconColor: Color(0xFF1976D2),

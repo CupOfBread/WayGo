@@ -1,0 +1,3 @@
+class MyProfileState {
+  MyProfileState();
+} 
