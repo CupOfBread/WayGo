@@ -30,9 +30,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.6
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
     - assets/map_style/
+flutter_native_splash:
+  color: "#FFFFFF"
+  android: true
+  ios: true

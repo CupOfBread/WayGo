@@ -7,6 +7,7 @@ import 'home_state.dart';
 import '../map/map_view.dart';
 import '../travel/travel_view.dart';
 import '../spot/spot_detail_view.dart';
+import '../travel/travel_list_view.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -36,6 +37,17 @@ class HomePage extends StatelessWidget {
                         runSpacing: 12,
                         alignment: WrapAlignment.start,
                         children: [
+                          _buildHomeCard(
+                            width: cardWidth,
+                            icon: Icons.list_alt,
+                            text: '旅程列表',
+                            color1: Color(0xFF4A90E2),
+                            color2: Color(0xFF50E3C2),
+                            boxShadowColor: Colors.lightBlue,
+                            onTap: () {
+                              Get.to(() => const TravelListPage());
+                            },
+                          ),
                           _buildHomeCard(
                             width: cardWidth,
                             icon: Icons.card_travel,
