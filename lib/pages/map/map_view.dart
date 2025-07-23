@@ -16,9 +16,10 @@ class MapPage extends StatelessWidget {
     logic.startLocating();
 
     final BMFMapOptions mapOptions = BMFMapOptions(
-      center: BMFCoordinate(27.960713, 120.713238),
-      zoomLevel: 12,
+      center: BMFCoordinate(30.251851, 120.152963),
+      zoomLevel: 14,
       showZoomControl: false,
+      showOperateLayer: false
     );
     return Scaffold(
       appBar: AppBar(title: const Text('地图页面')),
@@ -30,7 +31,7 @@ class MapPage extends StatelessWidget {
               controller.setMapDidLoadCallback(
                 callback: () {
                   controller.setCustomMapStyle(
-                    'assets/map_style/smoke_rain.sty',
+                    'assets/map_style/concise_cyan.sty',
                     0,
                   );
                   controller.setCustomMapStyleEnable(true);
