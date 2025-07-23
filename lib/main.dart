@@ -29,26 +29,13 @@ class WayGoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color themeColor = Color.fromRGBO(255, 81, 4, 1);
-
+    // 移除自定义主题色相关代码，使用Material默认主题色
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
       initialRoute: '/root',
       getPages: AppRoute.routes,
-      color: themeColor,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: themeColor),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: themeColor,
-            foregroundColor: Colors.white,
-          ),
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: themeColor,
-        ),
-      ),
+      // color: themeColor, // 移除
+      // theme: ThemeData(...), // 移除
       builder: FlutterSmartDialog.init(),
     );
   }

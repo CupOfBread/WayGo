@@ -11,23 +11,6 @@ class LoginLogic extends GetxController {
       SmartDialog.showToast('用户名和密码不能为空');
       return;
     }
-    // 弹出模态框
-    await showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: const Text('提示'),
-        content: const Text('本APP正处于开发阶段'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-            child: const Text('确认'),
-          ),
-        ],
-      ),
-    );
     // 确认后再跳转
     Get.offAllNamed('/root');
   }

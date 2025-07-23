@@ -8,6 +8,9 @@ import '../map/map_view.dart';
 import '../travel/travel_view.dart';
 import '../spot/spot_detail_view.dart';
 import '../travel/travel_list_view.dart';
+import '../account/account_list/account_list_view.dart';
+import '../account/account_detail/account_detail_view.dart' as detail_view;
+import '../account/account_record/account_record_view.dart' as record_view;
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -17,7 +20,76 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double cardWidth = ((MediaQuery.of(context).size.width - 64) / 2).clamp(80.0, 999.0);
+    double cardWidth = ((MediaQuery.of(context).size.width - 64) / 3).clamp(80.0, 999.0);
+    final List<_HomeCardData> group1 = [
+      _HomeCardData(
+        icon: Icons.list_alt,
+        text: '旅程列表',
+        onTap: () { Get.to(() => const TravelListPage()); },
+      ),
+      _HomeCardData(
+        icon: Icons.card_travel,
+        text: '旅程详情',
+        onTap: () {
+          Get.to(() => DefaultTabController(length: 3, child: TravelPage()));
+        },
+      ),
+      _HomeCardData(
+        icon: Icons.map,
+        text: '地图',
+        onTap: () { Get.to(() => const MapPage()); },
+      ),
+      _HomeCardData(
+        icon: Icons.park,
+        text: '景点详情',
+        onTap: () { Get.to(() => const SpotDetailPage()); },
+      ),
+    ];
+    final List<_HomeCardData> group2 = [
+      _HomeCardData(
+        icon: Icons.storefront,
+        text: '店铺详情',
+        onTap: () { Get.to(() => const StoreDetailPage()); },
+      ),
+      _HomeCardData(
+        icon: Icons.view_module,
+        text: '店铺列表',
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const StoreListPage()),
+          );
+        },
+      ),
+    ];
+    final List<_HomeCardData> group3 = [
+      _HomeCardData(
+        icon: Icons.login,
+        text: '登录页',
+        onTap: () { Get.toNamed('/login'); },
+      ),
+      _HomeCardData(
+        icon: Icons.radio,
+        text: '收音机',
+        onTap: () { Get.toNamed('/radio'); },
+      ),
+    ];
+    final List<_HomeCardData> group4 = [
+      _HomeCardData(
+        icon: Icons.book,
+        text: '账本列表',
+        onTap: () { Get.to(() => const AccountListPage()); },
+      ),
+      _HomeCardData(
+        icon: Icons.description,
+        text: '账本详情',
+        onTap: () { Get.to(() => const detail_view.AccountDetailPage()); },
+      ),
+      _HomeCardData(
+        icon: Icons.edit,
+        text: '记一笔',
+        onTap: () { Get.to(() => const record_view.AccountRecordPage()); },
+      ),
+    ];
     return Scaffold(
       backgroundColor: const Color(0xFFF5F6FA),
       body: SafeArea(
@@ -32,62 +104,18 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
-                        alignment: WrapAlignment.start,
-                        children: [
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.list_alt,
-                            text: '旅程列表',
-                            color1: Color(0xFF4A90E2),
-                            color2: Color(0xFF50E3C2),
-                            boxShadowColor: Colors.lightBlue,
-                            onTap: () {
-                              Get.to(() => const TravelListPage());
-                            },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+                        child: Text(
+                          '旅程功能',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
                           ),
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.card_travel,
-                            text: '旅程详情',
-                            color1: Color(0xFFFFA726),
-                            color2: Color(0xFFFF7043),
-                            boxShadowColor: Colors.orange,
-                            onTap: () {
-                              Get.to(
-                                () => DefaultTabController(
-                                  length: 3,
-                                  child: TravelPage(),
-                                ),
-                              );
-                            },
-                          ),
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.map,
-                            text: '地图',
-                            color1: Color(0xFF42A5F5),
-                            color2: Color(0xFF1976D2),
-                            boxShadowColor: Colors.blue,
-                            onTap: () {
-                              Get.to(() => const MapPage());
-                            },
-                          ),
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.park,
-                            text: '景点详情',
-                            color1: Color(0xFF66BB6A),
-                            color2: Color(0xFF43A047),
-                            boxShadowColor: Colors.green,
-                            onTap: () {
-                              Get.to(() => const SpotDetailPage());
-                            },
-                          ),
-                        ],
+                        ),
                       ),
+                      _buildCardGroup(group1, cardWidth, isJourneyGroup: true),
                       const SizedBox(height: 24),
                       Container(
                         width: 340,
@@ -97,37 +125,18 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
-                        alignment: WrapAlignment.start,
-                        children: [
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.storefront,
-                            text: '店铺详情',
-                            color1: Color(0xFFEC407A),
-                            color2: Color(0xFFAB47BC),
-                            boxShadowColor: Colors.purple,
-                            onTap: () {
-                              Get.to(() => const StoreDetailPage());
-                            },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+                        child: Text(
+                          '记账功能',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
                           ),
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.view_module,
-                            text: '店铺列表',
-                            color1: Color(0xFF6a85b6),
-                            color2: Color(0xFFbac8e0),
-                            boxShadowColor: Colors.blueGrey,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) => const StoreListPage()),
-                              );
-                            },
-                          ),
-                        ],
+                        ),
                       ),
+                      _buildCardGroup(group4, cardWidth, isAccountGroup: true),
                       const SizedBox(height: 24),
                       Container(
                         width: 340,
@@ -137,35 +146,39 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
-                        alignment: WrapAlignment.start,
-                        children: [
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.login,
-                            text: '登录页',
-                            color1: Color(0xFF43cea2),
-                            color2: Color(0xFF185a9d),
-                            boxShadowColor: Colors.teal,
-                            onTap: () {
-                              Get.toNamed('/login');
-                            },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+                        child: Text(
+                          '店铺功能',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
                           ),
-                          _buildHomeCard(
-                            width: cardWidth,
-                            icon: Icons.radio,
-                            text: '收音机',
-                            color1: Color(0xFFffb347),
-                            color2: Color(0xFFffcc33),
-                            boxShadowColor: Colors.orangeAccent,
-                            onTap: () {
-                              Get.toNamed('/radio');
-                            },
-                          ),
-                        ],
+                        ),
                       ),
+                      _buildCardGroup(group2, cardWidth, isShopGroup: true),
+                      const SizedBox(height: 24),
+                      Container(
+                        width: 340,
+                        child: Divider(
+                          color: Color(0xFFE0E0E0),
+                          thickness: 1,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+                        child: Text(
+                          '其他功能',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                      _buildCardGroup(group3, cardWidth, isOtherGroup: true),
                     ],
                   ),
                 ),
@@ -178,16 +191,162 @@ class HomePage extends StatelessWidget {
   }
 }
 
+Widget _buildCardGroup(List<_HomeCardData> cards, double cardWidth, {bool isJourneyGroup = false, bool isAccountGroup = false, bool isShopGroup = false, bool isOtherGroup = false}) {
+  return GridView.count(
+    crossAxisCount: 3,
+    shrinkWrap: true,
+    physics: NeverScrollableScrollPhysics(),
+    mainAxisSpacing: 16,
+    crossAxisSpacing: 12,
+    childAspectRatio: cardWidth / 100,
+    children: cards.map((card) => _buildHomeCard(
+      width: cardWidth,
+      icon: card.icon,
+      text: card.text,
+      onTap: card.onTap,
+      gradient: isJourneyGroup
+        ? LinearGradient(
+            colors: [Color(0xFFC471F5), Color(0xFFFA71CD)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            transform: GradientRotation(45 * 3.1415926 / 180),
+          )
+        : isAccountGroup
+        ? LinearGradient(
+            colors: [
+              Color(0xFFF78CA0),
+              Color(0xFFF9748F),
+              Color(0xFFFD868C),
+              Color(0xFFFE9A8B),
+            ],
+            stops: [0.0, 0.19, 0.6, 1.0],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            transform: GradientRotation(45 * 3.1415926 / 180),
+          )
+        : isShopGroup
+        ? LinearGradient(
+            colors: [Color(0xFF64B3F4), Color(0xFFC2E59C)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            transform: GradientRotation(45 * 3.1415926 / 180),
+          )
+        : isOtherGroup
+        ? LinearGradient(
+            colors: [Color(0xFF6E45E2), Color(0xFF88D3CE)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            transform: GradientRotation(45 * 3.1415926 / 180),
+          )
+        : null,
+      fontColor: (isJourneyGroup || isAccountGroup || isShopGroup || isOtherGroup) ? Colors.white : Colors.black87,
+      iconColor: (isJourneyGroup || isAccountGroup || isShopGroup || isOtherGroup) ? Colors.white : Colors.black87,
+      boxShadow: isJourneyGroup
+        ? [
+            BoxShadow(
+              color: Color(0xFFB04BEA).withValues(alpha: 0.25),
+              blurRadius: 16,
+              offset: Offset(0, 6),
+            ),
+            BoxShadow(
+              color: Color(0xFFFA71CD).withValues(alpha: 0.12),
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ]
+        : isAccountGroup
+        ? [
+            BoxShadow(
+              color: Color(0xFFF9748F).withValues(alpha: 0.18),
+              blurRadius: 16,
+              offset: Offset(0, 6),
+            ),
+            BoxShadow(
+              color: Color(0xFFFD868C).withValues(alpha: 0.10),
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ]
+        : isShopGroup
+        ? [
+            BoxShadow(
+              color: Color(0xFF64B3F4).withValues(alpha: 0.18),
+              blurRadius: 16,
+              offset: Offset(0, 6),
+            ),
+            BoxShadow(
+              color: Color(0xFFC2E59C).withValues(alpha: 0.10),
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ]
+        : isOtherGroup
+        ? [
+            BoxShadow(
+              color: Color(0xFF6E45E2).withValues(alpha: 0.18),
+              blurRadius: 16,
+              offset: Offset(0, 6),
+            ),
+            BoxShadow(
+              color: Color(0xFF88D3CE).withValues(alpha: 0.10),
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ]
+        : null,
+    )).toList(),
+  );
+}
+
+class _HomeCardData {
+  final IconData icon;
+  final String text;
+  final VoidCallback onTap;
+  _HomeCardData({
+    required this.icon,
+    required this.text,
+    required this.onTap,
+  });
+}
+
+// 修改 _buildHomeCard，添加点击缩放动画
+class _PressableCard extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onTap;
+  const _PressableCard({required this.child, required this.onTap, Key? key}) : super(key: key);
+  @override
+  State<_PressableCard> createState() => _PressableCardState();
+}
+class _PressableCardState extends State<_PressableCard> {
+  double _scale = 1.0;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      onTapDown: (_) => setState(() => _scale = 0.95),
+      onTapUp: (_) => setState(() => _scale = 1.0),
+      onTapCancel: () => setState(() => _scale = 1.0),
+      child: AnimatedScale(
+        scale: _scale,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.easeOut,
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 Widget _buildHomeCard({
   required double width,
   required IconData icon,
   required String text,
-  required Color color1,
-  required Color color2,
-  required Color boxShadowColor,
   required VoidCallback onTap,
+  Gradient? gradient,
+  Color fontColor = Colors.black87,
+  Color iconColor = Colors.black87,
+  List<BoxShadow>? boxShadow,
 }) {
-  return GestureDetector(
+  return _PressableCard(
     onTap: onTap,
     child: Container(
       width: width,
@@ -195,29 +354,20 @@ Widget _buildHomeCard({
       margin: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        gradient: LinearGradient(
-          colors: [color1, color2],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: boxShadowColor.withOpacity(0.2),
-            blurRadius: 8,
-            offset: Offset(0, 4),
-          ),
-        ],
+        color: gradient == null ? Colors.white : null,
+        gradient: gradient,
+        boxShadow: boxShadow,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 36, color: Colors.white),
+          Icon(icon, size: 36, color: iconColor),
           SizedBox(height: 12),
           Text(
             text,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.white,
+              color: fontColor,
               fontWeight: FontWeight.bold,
             ),
           ),
