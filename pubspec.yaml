@@ -37,7 +37,10 @@ flutter:
   assets:
     - assets/
     - assets/map_style/
+
+
 flutter_native_splash:
-  color: "#FFFFFF"
-  android: true
-  ios: true
+  color: "#000000"
+  image: assets/avatar.jpg
+  android_12:
+    image: assets/avatar.jpg
