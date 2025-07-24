@@ -64,7 +64,7 @@ class StampCollectionPage extends StatelessWidget {
                                 style: collected ? BorderStyle.solid : BorderStyle.solid,
                               ),
                               boxShadow: collected
-                                  ? [BoxShadow(color: Colors.orange.withOpacity(0.2), blurRadius: 8, spreadRadius: 2)]
+                                  ? [BoxShadow(color: Colors.orange.withAlpha((0.2 * 255).toInt()), blurRadius: 8, spreadRadius: 2)]
                                   : [],
                             ),
                             child: Icon(Icons.verified, size: 44, color: collected ? Colors.orange : Colors.grey),

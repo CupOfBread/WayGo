@@ -79,12 +79,12 @@ class ShowcasePage extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.18),
+                color: Colors.white.withAlpha((0.18 * 255).toInt()),
                 borderRadius: BorderRadius.circular(36),
                 border: Border.all(color: Color(0xFFD2B48C), width: 4),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.10),
+                    color: Colors.black.withAlpha((0.10 * 255).toInt()),
                     blurRadius: 32,
                     offset: Offset(0, 16),
                   ),
@@ -133,7 +133,7 @@ class _ShowcaseGlassItem extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
               gradient: RadialGradient(
-                colors: [Colors.white.withOpacity(0.35), Colors.transparent],
+                colors: [Colors.white.withAlpha((0.35 * 255).toInt()), Colors.transparent],
                 radius: 0.7,
                 center: Alignment.topCenter,
               ),
@@ -155,7 +155,7 @@ class _ShowcaseGlassItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.18),
+                  color: Colors.black.withAlpha((0.18 * 255).toInt()),
                   blurRadius: 6,
                   offset: Offset(0, 2),
                 ),
@@ -170,7 +170,7 @@ class _ShowcaseGlassItem extends StatelessWidget {
             width: 32,
             height: 6,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.10),
+              color: Colors.black.withAlpha((0.10 * 255).toInt()),
               borderRadius: BorderRadius.circular(6),
               boxShadow: [
                 BoxShadow(
@@ -187,12 +187,12 @@ class _ShowcaseGlassItem extends StatelessWidget {
           width: 70,
           height: 110,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.38),
+            color: Colors.white.withAlpha((0.38 * 255).toInt()),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(color: Color(0xFFD2B48C), width: 1.2),
             boxShadow: [
               BoxShadow(
-                color: Colors.brown.withOpacity(0.10),
+                color: Colors.brown.withAlpha((0.10 * 255).toInt()),
                 blurRadius: 8,
                 offset: Offset(0, 4),
               ),
@@ -225,7 +225,7 @@ class _WoodGrainPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFBCA177).withOpacity(0.12)
+      ..color = const Color(0xFFBCA177).withAlpha((0.12 * 255).toInt())
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     for (double y = 0; y < size.height; y += 32) {

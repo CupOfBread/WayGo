@@ -8,9 +8,9 @@ import 'package:waygo/pages/my/stamp_collection/stamp_collection_view.dart';
 import 'package:waygo/pages/my/ticket_album/ticket_album_view.dart';
 import 'package:waygo/pages/radio/radio_view.dart';
 
-import '../pages/home/home_view.dart';
-import '../pages/root/root_view.dart';
-import '../pages/spot/spot_detail_view.dart';
+import 'package:waygo/pages/home/home_view.dart';
+import 'package:waygo/pages/root/root_view.dart';
+import 'package:waygo/pages/spot/spot_detail_view.dart';
 
 class AppRoute {
   static const String root = '/root';

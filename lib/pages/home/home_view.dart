@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:waygo/pages/store/store_detail/store_detail_view.dart';
-import '../store/store_list_view.dart';
+import 'package:waygo/pages/store/store_list_view.dart';
 import 'home_logic.dart';
 import 'home_state.dart';
-import '../map/map_view.dart';
-import '../travel/travel_view.dart';
-import '../spot/spot_detail_view.dart';
-import '../travel/travel_list_view.dart';
-import '../account/account_list/account_list_view.dart';
-import '../account/account_detail/account_detail_view.dart' as detail_view;
-import '../account/account_record/account_record_view.dart' as record_view;
+import 'package:waygo/pages/map/map_view.dart';
+import 'package:waygo/pages/travel/travel_view.dart';
+import 'package:waygo/pages/spot/spot_detail_view.dart';
+import 'package:waygo/pages/travel/travel_list_view.dart';
+import 'package:waygo/pages/account/account_list/account_list_view.dart';
+import 'package:waygo/pages/account/account_detail/account_detail_view.dart' as detail_view;
+import 'package:waygo/pages/account/account_record/account_record_view.dart' as record_view;
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);

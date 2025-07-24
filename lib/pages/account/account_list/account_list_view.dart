@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../account_detail/account_detail_view.dart';
+import 'package:waygo/pages/account/account_detail/account_detail_view.dart';
 
 class AccountListPage extends StatelessWidget {
   const AccountListPage({Key? key}) : super(key: key);
@@ -41,11 +41,11 @@ class AccountListPage extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withAlpha((0.1 * 255).toInt()),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.15),
+              color: color.withAlpha((0.15 * 255).toInt()),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -62,7 +62,7 @@ class AccountListPage extends StatelessWidget {
                 children: [
                   Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
                   const SizedBox(height: 8),
-                  Text(subtitle, style: TextStyle(fontSize: 14, color: color.withOpacity(0.7))),
+                  Text(subtitle, style: TextStyle(fontSize: 14, color: color.withAlpha((0.7 * 255).toInt()))),
                 ],
               ),
             ),

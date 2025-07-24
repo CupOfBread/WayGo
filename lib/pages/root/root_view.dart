@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-import '../../component/bottom_nav_bar/bottom_nav_bar_logic.dart';
-import '../../component/bottom_nav_bar/bottom_nav_bar_view.dart';
-import '../home/home_view.dart';
-import '../my/my_index/my_index_view.dart';
+import 'package:waygo/component/bottom_nav_bar/bottom_nav_bar_logic.dart';
+import 'package:waygo/component/bottom_nav_bar/bottom_nav_bar_view.dart';
+import 'package:waygo/pages/home/home_view.dart';
+import 'package:waygo/pages/my/my_index/my_index_view.dart';
 import 'root_logic.dart';
 import 'root_state.dart';
 

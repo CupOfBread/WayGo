@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../account_record/account_record_view.dart';
-// 移除 fl_chart 相关 import
+import 'package:waygo/pages/account/account_record/account_record_view.dart';
 
 class AccountDetailPage extends StatelessWidget {
   const AccountDetailPage({Key? key}) : super(key: key);
@@ -47,7 +46,7 @@ class AccountDetailPage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.deepPurpleAccent.withOpacity(0.08),
+        color: Colors.deepPurpleAccent.withAlpha((0.08 * 255).toInt()),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -75,7 +74,7 @@ class AccountDetailPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
+            color: Colors.grey.withAlpha((0.08 * 255).toInt()),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -100,7 +99,7 @@ class AccountDetailPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
+            color: Colors.grey.withAlpha((0.08 * 255).toInt()),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),

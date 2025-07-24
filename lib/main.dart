@@ -14,11 +14,16 @@ Future<void> main() async {
 
   //透明状态栏
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarBrightness: Brightness.light, statusBarIconBrightness: Brightness.dark, statusBarColor: Colors.transparent)
+    const SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+    ),
   );
 
   await setupServiceLocator();
 
+  await Future.delayed(Duration(milliseconds: 400));
   runApp(const WayGoApp());
 
   requestPermission();
@@ -40,7 +45,6 @@ class WayGoApp extends StatelessWidget {
     );
   }
 }
-
 
 void requestPermission() async {
   bool hasLocationPermission = await requestLocationPermission();

@@ -68,7 +68,7 @@ class TravelLuggagePage extends StatelessWidget {
                   initiallyExpanded: true,
                   leading: Container(
                     decoration: BoxDecoration(
-                      color: category.color.withOpacity(0.15),
+                      color: category.color.withAlpha((0.15 * 255).toInt()),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     padding: const EdgeInsets.all(6),

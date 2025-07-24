@@ -79,7 +79,7 @@ class TravelPage extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Color(0xFF4A90E2).withOpacity(0.08),
+                        color: Color(0xFF4A90E2).withAlpha((0.08 * 255).toInt()),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Text(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../showcase/showcase_view.dart';
+import 'package:waygo/pages/my/showcase/showcase_view.dart';
 import 'my_index_logic.dart';
-import '../stamp_collection/stamp_collection_view.dart';
-import '../ticket_album/ticket_album_view.dart';
-import '../../login/login_view.dart';
-import '../my_footprint/my_footprint_view.dart';
-import '../about/about_view.dart';
-import '../my_profile/my_profile_view.dart';
+import 'package:waygo/pages/my/stamp_collection/stamp_collection_view.dart';
+import 'package:waygo/pages/my/ticket_album/ticket_album_view.dart';
+import 'package:waygo/pages/login/login_view.dart';
+import 'package:waygo/pages/my/my_footprint/my_footprint_view.dart';
+import 'package:waygo/pages/my/about/about_view.dart';
+import 'package:waygo/pages/my/my_profile/my_profile_view.dart';
 
 class MyIndexPage extends StatelessWidget {
   MyIndexPage({Key? key}) : super(key: key);
@@ -167,7 +167,7 @@ class _MyListTile extends StatelessWidget {
     return ListTile(
       leading: Container(
         decoration: BoxDecoration(
-          color: iconColor.withOpacity(0.08),
+          color: iconColor.withAlpha((0.08 * 255).toInt()),
           borderRadius: BorderRadius.circular(12),
         ),
         padding: EdgeInsets.all(8),

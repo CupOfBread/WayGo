@@ -51,7 +51,7 @@ class _TravelCard extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade300),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.08),
+              color: Colors.grey.withAlpha((0.08 * 255).toInt()),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),

@@ -18,7 +18,7 @@ class ShowTicket extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            color: Colors.grey.withAlpha((0.4 * 255).toInt()),
             spreadRadius: 2,
             blurRadius: 8,
             offset: const Offset(0, 4),

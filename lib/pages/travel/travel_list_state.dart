@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'travel_list_view.dart';
 
 class TravelListState {

@@ -40,7 +40,7 @@ class RadioPage extends StatelessWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.4),
+                            color: Colors.black.withAlpha((0.4 * 255).toInt()),
                             blurRadius: 32,
                             offset: Offset(0, 12),
                           ),
@@ -106,7 +106,7 @@ class RadioPage extends StatelessWidget {
                             color: state.isPlaying ? Colors.deepOrange : Colors.orange.shade400,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.deepOrange.withOpacity(0.18),
+                                color: Colors.deepOrange.withAlpha((0.18 * 255).toInt()),
                                 blurRadius: 16,
                                 offset: Offset(0, 6),
                               ),
