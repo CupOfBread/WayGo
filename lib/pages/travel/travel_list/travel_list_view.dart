@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'travel_list_logic.dart';
+import 'package:waygo/pages/travel/travel_list/travel_list_logic.dart';
 import 'package:waygo/pages/travel/travel_view.dart';
 
 class TravelListPage extends StatelessWidget {

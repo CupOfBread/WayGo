@@ -1,4 +1,4 @@
-import 'travel_list_view.dart';
+import 'package:waygo/pages/travel/travel_list/travel_list_view.dart';
 
 class TravelListState {
   List<TravelInfo> travels = [

@@ -10,7 +10,8 @@ import 'package:waygo/pages/radio/radio_view.dart';
 
 import 'package:waygo/pages/home/home_view.dart';
 import 'package:waygo/pages/root/root_view.dart';
-import 'package:waygo/pages/spot/spot_detail_view.dart';
+
+import '../pages/scenic_spot/scenic_spot_detail_view.dart';
 
 class AppRoute {
   static const String root = '/root';
@@ -18,7 +19,7 @@ class AppRoute {
   static const String home = '/home';
   static const String my = '/my';
   static const String about = '/my/about';
-  static const String spotDetail = '/spot/detail';
+  static const String spotDetail = '/scenic_spot/detail';
   static const String radio = '/radio';
   static const String profile = '/my/profile';
   static const String myFootprint = '/my/footprint';
@@ -31,7 +32,7 @@ class AppRoute {
     GetPage(name: home, page: () => HomePage()),
     GetPage(name: my, page: () => MyIndexPage()),
     GetPage(name: about, page: () => AboutPage()),
-    GetPage(name: spotDetail, page: () => const SpotDetailPage()),
+    GetPage(name: spotDetail, page: () => const ScenicSpotDetailPage()),
     GetPage(name: radio, page: () => const RadioPage()),
     GetPage(name: profile, page: () => const MyProfilePage()),
     GetPage(name: myFootprint, page: () => const MyFootprintPage()),
