@@ -7,9 +7,9 @@ class AccountRecordType {
 
   AccountRecordType(
     this.code,
-    this.isSysDefault,
     this.iconUrl, {
     required this.id,
     required this.name,
+    this.isSysDefault = false,
   });
 }

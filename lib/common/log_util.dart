@@ -1,4 +1,5 @@
 import 'package:logger/logger.dart';
+
 import 'json_util.dart';
 
 class LogUtil {
@@ -7,7 +8,7 @@ class LogUtil {
       methodCount: 0,
       colors: true,
       printEmojis: true,
-      printTime: true,
+      dateTimeFormat: DateTimeFormat.dateAndTime,
     ),
   );
 

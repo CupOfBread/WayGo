@@ -7,9 +7,9 @@ class AccountRecordCategory {
 
   AccountRecordCategory(
     this.code,
-    this.isSysDefault,
     this.iconUrl, {
     required this.id,
     required this.name,
+    this.isSysDefault = false,
   });
 }

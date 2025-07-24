@@ -5,20 +5,22 @@ class UserInfo {
   final int gender;
   final String username;
   final String phone;
-  final String email;
-  final String avatarUrl;
-  final String description;
-  final String location;
+  final String? email;
+  final String? avatarUrl;
+  final String? description;
+  final String? location;
+  final DateTime? birthday;
 
   UserInfo(
     this.code,
-    this.gender,
     this.phone,
     this.email,
     this.avatarUrl,
     this.description,
     this.name,
-    this.location, {
+    this.location,
+    this.birthday, {
+    this.gender = 0,
     required this.id,
     required this.username,
   });

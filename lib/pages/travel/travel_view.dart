@@ -79,7 +79,9 @@ class TravelPage extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Color(0xFF4A90E2).withAlpha((0.08 * 255).toInt()),
+                        color: Color(
+                          0xFF4A90E2,
+                        ).withAlpha((0.08 * 255).toInt()),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Text(
@@ -95,18 +97,19 @@ class TravelPage extends StatelessWidget {
                 const SizedBox(height: 4),
                 // TabBar放在这里
                 GetBuilder<TravelLogic>(
-                  builder: (_) => TabBar(
-                    controller: state.tabController,
-                    tabs: state.tabs.map((e) => Tab(text: e)).toList(),
-                    labelColor: const Color.fromRGBO(255, 81, 4, 1),
-                    unselectedLabelColor: Colors.black87,
-                    labelStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    indicatorColor: const Color.fromRGBO(255, 81, 4, 1),
-                    indicatorWeight: 3,
-                  ),
+                  builder:
+                      (_) => TabBar(
+                        controller: state.tabController,
+                        tabs: state.tabs.map((e) => Tab(text: e)).toList(),
+                        labelColor: const Color.fromRGBO(255, 81, 4, 1),
+                        unselectedLabelColor: Colors.black87,
+                        labelStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        indicatorColor: const Color.fromRGBO(255, 81, 4, 1),
+                        indicatorWeight: 3,
+                      ),
                 ),
               ],
             ),
@@ -115,20 +118,21 @@ class TravelPage extends StatelessWidget {
             child: Container(
               color: Colors.white,
               child: GetBuilder<TravelLogic>(
-                builder: (_) => TabBarView(
-                  controller: state.tabController,
-                  children: const [
-                    TravelItineraryPage(),
-                    TravelBillPage(),
-                    TravelLuggagePage(),
-                  ],
-                ),
+                builder:
+                    (_) => TabBarView(
+                      controller: state.tabController,
+                      children: const [
+                        TravelItineraryPage(),
+                        TravelBillPage(),
+                        TravelLuggagePage(),
+                      ],
+                    ),
               ),
             ),
           ),
           // index变化时打印
           Obx(() {
-            LogUtil.info('当前index: \\${state.tabIndex.value}');
+            LogUtil.info('当前index: ${state.tabIndex.value}');
             return const SizedBox.shrink();
           }),
         ],

@@ -10,15 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
 
   flutter_baidu_mapapi_base: ^3.9.5
   flutter_baidu_mapapi_map: ^3.9.5
   flutter_baidu_mapapi_utils: ^3.9.5
   flutter_baidu_mapapi_search: ^3.9.5
   flutter_bmflocation: ^3.8.0
-  permission_handler: ^12.0.0+1
 
+  cupertino_icons: ^1.0.8
   get: ^4.7.2
   logger: ^2.6.1
   dio: ^5.8.0+1
@@ -26,6 +25,8 @@ dependencies:
   carousel_slider: ^5.1.1
   audioplayers: ^6.5.0
   fl_chart: ^1.0.0
+  shared_preferences: ^2.5.3
+  permission_handler: ^12.0.0+1
 
 dev_dependencies:
   flutter_test:

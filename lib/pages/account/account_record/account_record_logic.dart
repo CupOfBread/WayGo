@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'account_record_state.dart';
-import 'package:waygo/model/account_record_type.dart';
-import 'package:waygo/model/account_record_category.dart';
+import 'package:waygo/model/account/account_record_type.dart';
+import 'package:waygo/model/account/account_record_category.dart';
 import 'package:waygo/model/user_info.dart';
 
 class AccountRecordLogic extends GetxController {

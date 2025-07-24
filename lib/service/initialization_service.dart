@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'package:waygo/common/log_util.dart';
 
+
 Future<void> setupServiceLocator() async {
   await _requestLocationPermission();
   initDio();

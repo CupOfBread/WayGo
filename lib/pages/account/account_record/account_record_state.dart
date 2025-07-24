@@ -1,5 +1,5 @@
-import 'package:waygo/model/account_record_type.dart';
-import 'package:waygo/model/account_record_category.dart';
+import 'package:waygo/model/account/account_record_type.dart';
+import 'package:waygo/model/account/account_record_category.dart';
 import 'package:waygo/model/user_info.dart';
 import 'package:get/get.dart';
 
@@ -38,28 +38,28 @@ class AccountRecordState {
   AccountRecordState()
     : form = AccountRecordForm(),
       types = [
-        AccountRecordType('expense', false, '', id: 1, name: '支出'),
-        AccountRecordType('income', false, '', id: 2, name: '收入'),
-        AccountRecordType('transfer', false, '', id: 3, name: '转账'),
-        AccountRecordType('balance', false, '', id: 4, name: '余额'),
-        AccountRecordType('refund', false, '', id: 5, name: '退款'),
+        AccountRecordType('expense', '', id: 1, name: '支出', isSysDefault: false),
+        AccountRecordType('income', '', id: 2, name: '收入', isSysDefault: false),
+        AccountRecordType('transfer', '', id: 3, name: '转账', isSysDefault: false),
+        AccountRecordType('balance', '', id: 4, name: '余额', isSysDefault: false),
+        AccountRecordType('refund', '', id: 5, name: '退款', isSysDefault: false),
       ],
       categories = [
-        AccountRecordCategory('communication', false, '', id: 8, name: '通讯'),
-        AccountRecordCategory('medical', false, '', id: 9, name: '医疗'),
-        AccountRecordCategory('relationship', false, '', id: 10, name: '人情'),
-        AccountRecordCategory('scenic', false, '', id: 1, name: '景点'),
-        AccountRecordCategory('food', false, '', id: 2, name: '餐饮'),
-        AccountRecordCategory('hotel', false, '', id: 3, name: '住宿'),
-        AccountRecordCategory('traffic', false, '', id: 4, name: '交通'),
-        AccountRecordCategory('shopping', false, '', id: 5, name: '购物'),
-        AccountRecordCategory('entertainment', false, '', id: 6, name: '娱乐'),
-        AccountRecordCategory('other', false, '', id: 7, name: '其他'),
+        AccountRecordCategory('scenic', '', id: 1, name: '景点', isSysDefault: false),
+        AccountRecordCategory('food', '', id: 2, name: '餐饮', isSysDefault: false),
+        AccountRecordCategory('hotel', '', id: 3, name: '住宿', isSysDefault: false),
+        AccountRecordCategory('traffic', '', id: 4, name: '交通', isSysDefault: false),
+        AccountRecordCategory('shopping', '', id: 5, name: '购物', isSysDefault: false),
+        AccountRecordCategory('entertainment', '', id: 6, name: '娱乐', isSysDefault: false),
+        AccountRecordCategory('other', '', id: 7, name: '其他', isSysDefault: false),
+        AccountRecordCategory('communication', '', id: 8, name: '通讯', isSysDefault: false),
+        AccountRecordCategory('medical', '', id: 9, name: '医疗', isSysDefault: false),
+        AccountRecordCategory('relationship', '', id: 10, name: '人情', isSysDefault: false),
       ],
       persons = [
-        UserInfo('self', 0, '', '', '', '', '自己', '', id: 1, username: 'self'),
-        UserInfo('a', 0, '', '', '', '', '同伴A', '', id: 2, username: 'a'),
-        UserInfo('b', 0, '', '', '', '', '同伴B', '', id: 3, username: 'b'),
-        UserInfo('c', 0, '', '', '', '', '同伴C', '', id: 4, username: 'c'),
+        UserInfo('self', '', '', '', '', '自己', '', DateTime.now(), gender: 0, id: 1, username: 'self'),
+        UserInfo('a', '', '', '', '', '同伴A', '', DateTime.now(), gender: 0, id: 2, username: 'a'),
+        UserInfo('b', '', '', '', '', '同伴B', '', DateTime.now(), gender: 0, id: 3, username: 'b'),
+        UserInfo('c', '', '', '', '', '同伴C', '', DateTime.now(), gender: 0, id: 4, username: 'c'),
       ];
 }
