@@ -1,9 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:waygo/pages/account/account_record/account_record_view.dart';
+import 'package:waygo/model/account/account_book.dart';
+
+// 新增内部数据结构
+class _RecordWithDirection {
+  final AccountRecord record;
+  final int direction;
+  _RecordWithDirection(this.record, this.direction);
+}
 
 class AccountDetailPage extends StatelessWidget {
   const AccountDetailPage({Key? key}) : super(key: key);
+
+  // 直接对象List，包含direction
+  List<_RecordWithDirection> get _records => [
+        _RecordWithDirection(
+          AccountRecord(1, 1, DateTime(2024, 6, 1, 8, 30), 1, [2, 3], '早餐', amount: 12.0, id: 1, accountBookId: 1),
+          -1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(2, 2, DateTime(2024, 6, 1, 9, 0), 1, [2], '工资', amount: 5000.0, id: 2, accountBookId: 1),
+          1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(3, 6, DateTime(2024, 6, 1, 10, 0), 1, [2], '借入', amount: 100.0, id: 3, accountBookId: 1),
+          1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(4, 7, DateTime(2024, 6, 1, 11, 0), 1, [2], '还款', amount: 50.0, id: 4, accountBookId: 1),
+          -1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(1, 3, DateTime(2024, 6, 1, 8, 50), 1, [2], '交通', amount: 3.0, id: 5, accountBookId: 1),
+          -1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(5, 5, DateTime(2024, 5, 30, 15, 0), 1, [2], '转账', amount: 200.0, id: 6, accountBookId: 1),
+          1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(1, 1, DateTime(2024, 5, 29, 7, 30), 1, [2], '午餐', amount: 18.0, id: 7, accountBookId: 1),
+          -1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(1, 1, DateTime(2024, 5, 28, 19, 0), 1, [2], '晚餐', amount: 25.0, id: 8, accountBookId: 1),
+          -1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(3, 6, DateTime(2024, 5, 27, 8, 40), 1, [2], '借入', amount: 200.0, id: 9, accountBookId: 1),
+          1,
+        ),
+        _RecordWithDirection(
+          AccountRecord(4, 7, DateTime(2024, 5, 26, 10, 0), 1, [2], '还款', amount: 100.0, id: 10, accountBookId: 1),
+          -1,
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +76,7 @@ class AccountDetailPage extends StatelessWidget {
           const SizedBox(height: 16),
           const Text('账单明细', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
-          _buildBillItem('早餐', '-12.00', '2024-06-01', Colors.orange),
-          _buildBillItem('工资', '+5000.00', '2024-06-01', Colors.green),
-          _buildBillItem('交通', '-3.00', '2024-06-01', Colors.blue),
-          _buildBillItem('电影', '-45.00', '2024-05-31', Colors.purple),
-          _buildBillItem('转账', '+200.00', '2024-05-30', Colors.teal),
+          ..._records.map((e) => _buildBillItem(e.record, e.direction)).toList(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -83,8 +131,8 @@ class AccountDetailPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: const [
-          _StatisticItem(label: '本月支出', value: '¥1200.00', color: Colors.red),
-          _StatisticItem(label: '本月收入', value: '¥5000.00', color: Colors.green),
+          _StatisticItem(label: '支出', value: '-¥1200.00', color: Colors.red),
+          _StatisticItem(label: '收入', value: '+¥5000.00', color: Colors.green),
           _StatisticItem(label: '余额', value: '¥3800.00', color: Colors.blue),
         ],
       ),
@@ -133,14 +181,36 @@ class AccountDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBillItem(String title, String amount, String date, Color color) {
+  Widget _buildBillItem(AccountRecord record, int direction) {
+    // 类型和颜色映射
+    final typeMap = {1: '支出', 2: '收入', 3: '借入', 4: '还款', 5: '转账'};
+    final categoryMap = {
+      1: '餐饮',
+      2: '工资',
+      3: '交通',
+      4: '娱乐',
+      5: '转账',
+      6: '借入',
+      7: '还款',
+    };
+    final colorMap = {
+      1: Colors.orange,
+      2: Colors.green,
+      3: Colors.blue,
+      4: Colors.purple,
+      5: Colors.teal,
+      6: Colors.brown,
+      7: Colors.redAccent,
+    };
+    final amountStr = (direction == 1 ? '+' : '-') + record.amount.toStringAsFixed(2);
+    final dateStr = '${record.createTime.year}-${record.createTime.month.toString().padLeft(2, '0')}-${record.createTime.day.toString().padLeft(2, '0')}';
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        leading: Icon(Icons.category, color: color),
-        title: Text(title),
-        subtitle: Text(date),
-        trailing: Text(amount, style: TextStyle(color: amount.startsWith('-') ? Colors.red : Colors.green, fontWeight: FontWeight.bold)),
+        leading: Icon(Icons.category, color: colorMap[record.categoryId] ?? Colors.grey),
+        title: Text(record.remark ?? categoryMap[record.categoryId] ?? '账单'),
+        subtitle: Text('$dateStr  ${typeMap[record.typeId] ?? ''}'),
+        trailing: Text(amountStr, style: TextStyle(color: direction == 1 ? Colors.green : Colors.red, fontWeight: FontWeight.bold)),
       ),
     );
   }

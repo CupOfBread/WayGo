@@ -2,8 +2,8 @@ class AccountBook {
   final int id;
   final String code;
   final String name;
-  final String coverUrl;
-  final String description;
+  final String? coverUrl;
+  final String? description;
   final DateTime createTime;
 
   AccountBook(

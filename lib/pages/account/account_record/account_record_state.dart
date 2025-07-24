@@ -38,11 +38,11 @@ class AccountRecordState {
   AccountRecordState()
     : form = AccountRecordForm(),
       types = [
-        AccountRecordType('expense', '', id: 1, name: '支出', isSysDefault: false),
-        AccountRecordType('income', '', id: 2, name: '收入', isSysDefault: false),
-        AccountRecordType('transfer', '', id: 3, name: '转账', isSysDefault: false),
-        AccountRecordType('balance', '', id: 4, name: '余额', isSysDefault: false),
-        AccountRecordType('refund', '', id: 5, name: '退款', isSysDefault: false),
+        AccountRecordType('expense', '', id: 1, name: '支出', isSysDefault: true, direction: -1),
+        AccountRecordType('income', '', id: 2, name: '收入', isSysDefault: true, direction: 1),
+        AccountRecordType('transfer', '', id: 3, name: '转账', isSysDefault: true, direction: -1),
+        AccountRecordType('balance', '', id: 4, name: '余额', isSysDefault: true, direction: 1),
+        AccountRecordType('refund', '', id: 5, name: '退款', isSysDefault: true, direction: 1),
       ],
       categories = [
         AccountRecordCategory('scenic', '', id: 1, name: '景点', isSysDefault: false),
