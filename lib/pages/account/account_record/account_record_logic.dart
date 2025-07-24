@@ -6,6 +6,7 @@ import 'account_record_state.dart';
 import 'package:waygo/model/account/account_record_type.dart';
 import 'package:waygo/model/account/account_record_category.dart';
 import 'package:waygo/model/user_info.dart';
+import 'package:waygo/service/account_data_service.dart';
 
 class AccountRecordLogic extends GetxController {
   final AccountRecordState state = AccountRecordState();
@@ -17,10 +18,20 @@ class AccountRecordLogic extends GetxController {
 
   @override
   void onInit() {
-    types = state.types.obs;
-    categories = state.categories.obs;
+    types = <AccountRecordType>[].obs;
+    categories = <AccountRecordCategory>[].obs;
     persons = state.persons.obs;
+    _loadTypesAndCategories();
     super.onInit();
+  }
+
+  Future<void> _loadTypesAndCategories() async {
+    final typeList = await AccountDataService.getAccountRecordTypes();
+    final categoryList = await AccountDataService.getAccountRecordCategories();
+    types.assignAll(typeList);
+    categories.assignAll(categoryList);
+    state.types = typeList;
+    state.categories = categoryList;
   }
 
   void setTypeId(int id) => state.form.typeId.value = id;
