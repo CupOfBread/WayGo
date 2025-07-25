@@ -1,16 +1,16 @@
 class AccountBook {
   final int id;
-  final String code;
+  final int ownerId;
   final String name;
   final String? coverUrl;
   final String? description;
   final DateTime createTime;
 
   AccountBook(
-    this.code,
     this.coverUrl,
     this.description,
-    this.createTime, {
+    this.createTime,
+    this.ownerId, {
     required this.id,
     required this.name,
   });
@@ -23,7 +23,7 @@ class AccountRecord {
   final int categoryId;
   final double amount;
   final DateTime createTime;
-  final int payerId;
+  final int? payerId;
   final List<int>? participantIds;
   final String? remark;
 
