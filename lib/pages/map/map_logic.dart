@@ -12,7 +12,9 @@ class MapLogic extends GetxController {
   final MapState state = MapState();
 
   static Future<Uint8List?> generateExampleMarkerBytes(
-    BuildContext context, {
+    BuildContext context,
+    String line1,
+    String line2, {
     double pixelRatio = 3.0,
   }) async {
     final GlobalKey repaintKey = GlobalKey();
@@ -32,11 +34,11 @@ class MapLogic extends GetxController {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  '第一天',
+                Text(
+                  line1,
                   style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900),
                 ),
-                const Text('2个地点', style: TextStyle(color: Colors.white, fontSize: 12)),
+                Text(line2, style: TextStyle(color: Colors.white, fontSize: 12)),
               ],
             ),
           ),
@@ -64,13 +66,22 @@ class MapLogic extends GetxController {
 
   /// 添加示例marker到地图
   Future<void> addExampleMarker(BuildContext context) async {
-    final bytes = await MapLogic.generateExampleMarkerBytes(context);
-    if (bytes == null) return;
-    BMFMarker marker = BMFMarker.iconData(
+    final mark1Stream1 = await MapLogic.generateExampleMarkerBytes(context, "第一天", "3个地点");
+    if (mark1Stream1 == null) return;
+    BMFMarker marker1 = BMFMarker.iconData(
       position: BMFCoordinate(30.252625, 120.154250),
-      iconData: bytes,
+      iconData: mark1Stream1,
     );
-    state.mapController.addMarker(marker);
+
+    final mark1Stream2 = await MapLogic.generateExampleMarkerBytes(context, "逃班威龙", "11班！！！");
+    if (mark1Stream2 == null) return;
+    BMFMarker marker2 = BMFMarker.iconData(
+      position: BMFCoordinate(30.197208, 120.093279),
+      iconData: mark1Stream2,
+    );
+
+    state.mapController.addMarker(marker1);
+    state.mapController.addMarker(marker2);
   }
 
   BaiduLocationAndroidOption initAndroidOptions() {

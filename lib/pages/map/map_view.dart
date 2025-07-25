@@ -18,8 +18,8 @@ class MapPage extends StatelessWidget {
     logic.startLocating();
 
     final BMFMapOptions mapOptions = BMFMapOptions(
-      center: BMFCoordinate(30.251851, 120.152963),
-      zoomLevel: 14,
+      center: BMFCoordinate(30.256702, 120.120948),
+      zoomLevel: 13,
       showZoomControl: false,
       showOperateLayer: false,
     );
@@ -82,7 +82,7 @@ class MapPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "点击右下角按钮移动到当前位置，长按地图可以进行选点。",
+                        "点击右下角按钮1移动到当前位置，长按地图可以进行选点查看坐标。",
                         style: const TextStyle(fontSize: 12, color: Colors.black26),
                       ),
                     ],
@@ -100,6 +100,7 @@ class MapPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             FloatingActionButton(
+              heroTag: '1',
               onPressed: () {
                 final location = state.bmfUserLocation.location;
                 if (location != null) {
@@ -114,10 +115,11 @@ class MapPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             FloatingActionButton(
+              heroTag: '2',
               onPressed: () {
                 // 唤起百度地图：https://lbs.baidu.com/faq/api?title=webapi/uri/andriod
                 launchUrlString(
-                  "baidumap://map/direction?origin=name:我家|latlng:27.988699,120.692134&destination=name:你家|latlng:30.380327,102.683860&coord_type=bd09ll&mode=driving&sy=0&car_type=TIME",
+                  "baidumap://map/direction?origin=name:我家|latlng:27.988699,120.692134&destination=name:你家|latlng:30.197208,120.093279&coord_type=bd09ll&mode=driving&sy=0&car_type=TIME",
                 );
               },
               child: const Icon(Icons.map),
