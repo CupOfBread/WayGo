@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'map_logic.dart';
 import 'map_state.dart';
 import 'package:flutter/rendering.dart';
@@ -92,18 +93,37 @@ class MapPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final location = state.bmfUserLocation.location;
-          if (location != null) {
-            state.mapController.setCenterCoordinate(location.coordinate!, false);
-            state.mapController.setNewMapStatus(
-              mapStatus: BMFMapStatus(fLevel: 16, fRotation: 0),
-              animateDurationMs: 1000,
-            );
-          }
-        },
-        child: const Icon(Icons.my_location),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 16, bottom: 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                final location = state.bmfUserLocation.location;
+                if (location != null) {
+                  state.mapController.setCenterCoordinate(location.coordinate!, false);
+                  state.mapController.setNewMapStatus(
+                    mapStatus: BMFMapStatus(fLevel: 16, fRotation: 0),
+                    animateDurationMs: 1000,
+                  );
+                }
+              },
+              child: const Icon(Icons.my_location),
+            ),
+            const SizedBox(height: 16),
+            FloatingActionButton(
+              onPressed: () {
+                // 唤起百度地图：https://lbs.baidu.com/faq/api?title=webapi/uri/andriod
+                launchUrlString(
+                  "baidumap://map/direction?origin=name:我家|latlng:27.988699,120.692134&destination=name:你家|latlng:30.380327,102.683860&coord_type=bd09ll&mode=driving&sy=0&car_type=TIME",
+                );
+              },
+              child: const Icon(Icons.map),
+            ),
+          ],
+        ),
       ),
     );
   }
