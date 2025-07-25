@@ -35,14 +35,24 @@ class LogUtil {
   /// 自动对象转json，带tag
   static String _wrap(dynamic msg, String? tag) {
     String content;
-    if (msg is String) {
-      content = msg;
-    } else {
+    if (msg is Map || msg is List) {
       content = JsonUtil.encode(msg);
+    } else if (_hasToJson(msg)) {
+      content = JsonUtil.encode((msg as dynamic).toJson());
+    } else {
+      content = msg.toString();
     }
     if (tag != null && tag.isNotEmpty) {
       return '[$tag] $content';
     }
     return content;
+  }
+
+  static bool _hasToJson(dynamic obj) {
+    try {
+      return obj != null && obj.toJson is Function;
+    } catch (_) {
+      return false;
+    }
   }
 }

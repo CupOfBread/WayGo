@@ -19,7 +19,7 @@ class MapPage extends StatelessWidget {
       center: BMFCoordinate(30.251851, 120.152963),
       zoomLevel: 14,
       showZoomControl: false,
-      showOperateLayer: false
+      showOperateLayer: false,
     );
     return Scaffold(
       appBar: AppBar(title: const Text('地图页面')),
@@ -28,19 +28,25 @@ class MapPage extends StatelessWidget {
           BMFMapWidget(
             mapOptions: mapOptions,
             onBMFMapCreated: (controller) {
-              controller.setMapDidLoadCallback(
+              state.mapController = controller;
+
+              state.mapController.showUserLocation(true);
+              // BMFUserLocationDisplayParam userLocationDisplayParam = BMFUserLocationDisplayParam(
+              //   enableDirection: false,
+              //   userTrackingMode: BMFUserTrackingMode.FollowWithHeading,
+              // );
+              // state.mapController.updateLocationViewWithParam(userLocationDisplayParam);
+
+              state.mapController.setMapDidLoadCallback(
                 callback: () {
-                  controller.setCustomMapStyle(
-                    'assets/map_style/concise_cyan.sty',
-                    0,
-                  );
-                  controller.setCustomMapStyleEnable(true);
+                  state.mapController.setCustomMapStyle('assets/map_style/concise_cyan.sty', 0);
+                  state.mapController.setCustomMapStyleEnable(true);
                 },
               );
-              controller.setMapOnLongClickCallback(
+              state.mapController.setMapOnLongClickCallback(
                 callback: (BMFCoordinate coordinate) {
-                  logic.pickedLatitude.value = coordinate.latitude;
-                  logic.pickedLongitude.value = coordinate.longitude;
+                  state.pickedLatitude.value = coordinate.latitude;
+                  state.pickedLongitude.value = coordinate.longitude;
                 },
               );
             },
@@ -50,9 +56,9 @@ class MapPage extends StatelessWidget {
             left: 16,
             right: 16,
             child: Obx(() {
-              final lat = logic.latitude.value;
-              final lng = logic.longitude.value;
-              final alt = logic.altitude.value;
+              final lat = state.latitude.value;
+              final lng = state.longitude.value;
+              final alt = state.altitude.value;
               return Card(
                 color: Colors.white.withAlpha((0.9 * 255).toInt()),
                 elevation: 4,
@@ -73,8 +79,13 @@ class MapPage extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         '选点坐标：'
-                        '${logic.pickedLatitude.value == 0.0 && logic.pickedLongitude.value == 0.0 ? '--' : '${logic.pickedLatitude.value.toStringAsFixed(6)}, ${logic.pickedLongitude.value.toStringAsFixed(6)}'}',
+                        '${state.pickedLatitude.value == 0.0 && state.pickedLongitude.value == 0.0 ? '--' : '${state.pickedLatitude.value.toStringAsFixed(6)}, ${state.pickedLongitude.value.toStringAsFixed(6)}'}',
                         style: const TextStyle(fontSize: 14, color: Colors.blue),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "点击右下角按钮移动到当前位置，长按地图可以进行选点。",
+                        style: const TextStyle(fontSize: 12, color: Colors.black26),
                       ),
                     ],
                   ),
@@ -86,7 +97,14 @@ class MapPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // 定位逻辑待实现
+          final location = state.bmfUserLocation.location;
+          if (location != null) {
+            state.mapController.setCenterCoordinate(location.coordinate!, false);
+            state.mapController.setNewMapStatus(
+              mapStatus: BMFMapStatus(fLevel: 16, fRotation: 0),
+              animateDurationMs: 1000,
+            );
+          }
         },
         child: const Icon(Icons.my_location),
       ),

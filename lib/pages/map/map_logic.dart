@@ -1,18 +1,11 @@
+import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
+import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:get/get.dart';
 import 'map_state.dart';
 
 class MapLogic extends GetxController {
   final MapState state = MapState();
-
-  // 新增：响应式经纬度
-  final RxDouble latitude = 0.0.obs;
-  final RxDouble longitude = 0.0.obs;
-  final RxDouble altitude = 0.0.obs;
-
-  // 新增：响应式选点坐标
-  final RxDouble pickedLatitude = 0.0.obs;
-  final RxDouble pickedLongitude = 0.0.obs;
 
   BaiduLocationAndroidOption initAndroidOptions() {
     BaiduLocationAndroidOption options = BaiduLocationAndroidOption(
@@ -71,14 +64,35 @@ class MapLogic extends GetxController {
     Map androidMap = initAndroidOptions().getMap();
     Map iosMap = initIOSOptions().getMap();
     state.myLocPlugin.setAgreePrivacy(true);
+    state.myLocPlugin.updateHeadingCallback(
+      callback: (BaiduHeading result) {
+        state.bmfUserLocation.heading = BMFHeading(magneticHeading: result.magneticHeading);
+        // state.bmfUserLocation.location?.course = result.headingAccuracy;
+        // LogUtil.info(msg)
+      },
+    );
     state.myLocPlugin.seriesLocationCallback(
       callback: (BaiduLocation result) {
-        latitude.value = result.latitude ?? 0.0;
-        longitude.value = result.longitude ?? 0.0;
-        altitude.value = result.altitude ?? 0.0;
+        state.latitude.value = result.latitude ?? 0.0;
+        state.longitude.value = result.longitude ?? 0.0;
+        state.altitude.value = result.altitude ?? 0.0;
+
+        state.bmfUserLocation.location = BMFLocation(
+          coordinate: BMFCoordinate(state.latitude.value, state.longitude.value),
+        );
+
+        state.mapController.updateLocationData(state.bmfUserLocation);
       },
     );
     await state.myLocPlugin.prepareLoc(androidMap, iosMap);
     await state.myLocPlugin.startLocation();
+    await state.myLocPlugin.startUpdatingHeading();
+  }
+
+  @override
+  void onClose() {
+    state.myLocPlugin.stopLocation();
+    state.myLocPlugin.stopUpdatingHeading();
+    super.onClose();
   }
 }
