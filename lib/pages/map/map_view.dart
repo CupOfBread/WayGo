@@ -4,6 +4,7 @@ import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:get/get.dart';
 import 'map_logic.dart';
 import 'map_state.dart';
+import 'package:flutter/rendering.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -21,22 +22,16 @@ class MapPage extends StatelessWidget {
       showZoomControl: false,
       showOperateLayer: false,
     );
+
     return Scaffold(
       appBar: AppBar(title: const Text('地图页面')),
       body: Stack(
         children: [
           BMFMapWidget(
             mapOptions: mapOptions,
-            onBMFMapCreated: (controller) {
+            onBMFMapCreated: (controller) async {
               state.mapController = controller;
-
               state.mapController.showUserLocation(true);
-              // BMFUserLocationDisplayParam userLocationDisplayParam = BMFUserLocationDisplayParam(
-              //   enableDirection: false,
-              //   userTrackingMode: BMFUserTrackingMode.FollowWithHeading,
-              // );
-              // state.mapController.updateLocationViewWithParam(userLocationDisplayParam);
-
               state.mapController.setMapDidLoadCallback(
                 callback: () {
                   state.mapController.setCustomMapStyle('assets/map_style/concise_cyan.sty', 0);
@@ -49,6 +44,8 @@ class MapPage extends StatelessWidget {
                   state.pickedLongitude.value = coordinate.longitude;
                 },
               );
+              // 调用logic中的方法添加marker
+              logic.addExampleMarker(context);
             },
           ),
           Positioned(

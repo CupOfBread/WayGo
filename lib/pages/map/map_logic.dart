@@ -3,9 +3,75 @@ import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:get/get.dart';
 import 'map_state.dart';
+import 'package:flutter/material.dart';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:flutter/rendering.dart';
 
 class MapLogic extends GetxController {
   final MapState state = MapState();
+
+  static Future<Uint8List?> generateExampleMarkerBytes(
+    BuildContext context, {
+    double pixelRatio = 3.0,
+  }) async {
+    final GlobalKey repaintKey = GlobalKey();
+    final widget = Material(
+      type: MaterialType.transparency,
+      child: Center(
+        child: RepaintBoundary(
+          key: repaintKey,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              border: Border.all(color: Colors.white, width: 2),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  '第一天',
+                  style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w900),
+                ),
+                const Text('2个地点', style: TextStyle(color: Colors.white, fontSize: 12)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry entry = OverlayEntry(builder: (_) => widget);
+    overlayState.insert(entry);
+
+    // 等待渲染
+    await Future.delayed(const Duration(milliseconds: 100));
+    RenderRepaintBoundary? boundary =
+        repaintKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    if (boundary == null) {
+      entry.remove();
+      return null;
+    }
+    ui.Image image = await boundary.toImage(pixelRatio: pixelRatio);
+    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    entry.remove();
+    return byteData?.buffer.asUint8List();
+  }
+
+  /// 添加示例marker到地图
+  Future<void> addExampleMarker(BuildContext context) async {
+    final bytes = await MapLogic.generateExampleMarkerBytes(context);
+    if (bytes == null) return;
+    BMFMarker marker = BMFMarker.iconData(
+      position: BMFCoordinate(30.252625, 120.154250),
+      iconData: bytes,
+    );
+    state.mapController.addMarker(marker);
+  }
 
   BaiduLocationAndroidOption initAndroidOptions() {
     BaiduLocationAndroidOption options = BaiduLocationAndroidOption(
