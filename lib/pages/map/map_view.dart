@@ -28,7 +28,7 @@ class MapPage extends StatelessWidget {
       appBar: AppBar(title: const Text('地图页面')),
       body: Stack(
         children: [
-          BMFMapWidget(
+          BMFTextureMapWidget(
             mapOptions: mapOptions,
             onBMFMapCreated: (controller) async {
               state.mapController = controller;

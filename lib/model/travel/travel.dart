@@ -14,10 +14,11 @@ class TravelPlan {
   late final int status; // 计划状态(规划中,进行中,已完成,已取消)
   late final double? totalDistance; // 总里程（公里）
   late final int totalDays; // 总天数
-  late final DateTime createTime; // 创建时间
-  late final DateTime? updateTime; // 更新时间
   late final List<TravelItinerary> itineraries; // 行程安排列表
   late final int? shareLuggageId; //共享行李清单
+
+  late final DateTime createTime; // 创建时间
+  late final DateTime? updateTime; // 更新时间
 }
 
 /// 行程模型

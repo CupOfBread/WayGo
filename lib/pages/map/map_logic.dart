@@ -4,7 +4,6 @@ import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:get/get.dart';
-import 'package:waygo/common/log_util.dart';
 import 'map_state.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
@@ -147,8 +146,6 @@ class MapLogic extends GetxController {
 
     state.myLocPlugin.updateHeadingCallback(
       callback: (BaiduHeading result) {
-        LogUtil.info("trueHeading: ${result.trueHeading}");
-        LogUtil.info("magneticHeading: ${BMFHeading.fromMap(result.getMap()).magneticHeading}");
         if (Platform.isAndroid) {
           state.bmfUserLocation.location?.course = result.trueHeading;
         }

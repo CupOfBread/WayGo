@@ -8,9 +8,11 @@ class ScenicSpot {
   final DateTime? scoreUpdateTime;
   final List<String>? picUrlList;
   final String description;
-  final DateTime createTime;
   final ScenicSpotExtInfo? extInfo;
   final Coordinate? coordinate;
+
+  final DateTime createTime;
+  final DateTime updateTime;
 
   ScenicSpot(
     this.picUrlList,
@@ -19,7 +21,8 @@ class ScenicSpot {
     this.scoreUpdateTime,
     this.createTime,
     this.extInfo,
-    this.coordinate, {
+    this.coordinate,
+    this.updateTime, {
     required this.id,
     required this.code,
     required this.name,
@@ -32,10 +35,5 @@ class ScenicSpotExtInfo {
   final String location;
   final String telephone;
 
-  ScenicSpotExtInfo(
-    this.scenicSpotId,
-    this.businessHours,
-    this.location,
-    this.telephone,
-  );
+  ScenicSpotExtInfo(this.scenicSpotId, this.businessHours, this.location, this.telephone);
 }

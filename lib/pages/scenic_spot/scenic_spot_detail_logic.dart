@@ -26,6 +26,7 @@ class ScenicSpotDetailLogic extends GetxController {
         '028-12345678',
       ),
       null,
+      DateTime.now(),
       id: 1,
       code: 'RMGY',
       name: '人民公园',

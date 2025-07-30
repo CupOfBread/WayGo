@@ -29,8 +29,6 @@ class Luggage {
   late final bool? isValuable; // 是否贵重物品
   late final bool isInSuitcase = false; // 是否已放入行李箱
 
-  late final DateTime createTime;
-  late final DateTime? updateTime;
   late final DateTime? packTime; // 打包时间
   late final DateTime? unpackTime; // 拆包时间
 
@@ -38,6 +36,9 @@ class Luggage {
   late final String? tags; // 标签，用逗号分隔
 
   late final String? imageUrl; // 图片信息
+
+  late final DateTime createTime;
+  late final DateTime? updateTime;
 }
 
 // 行李分类枚举

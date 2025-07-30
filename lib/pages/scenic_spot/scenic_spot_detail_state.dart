@@ -11,6 +11,7 @@ class ScenicSpotDetailState {
         DateTime.now(),
         null,
         null,
+        DateTime.now(),
         id: 0,
         code: '',
         name: '',
