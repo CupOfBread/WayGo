@@ -11,6 +11,7 @@ import 'package:waygo/pages/travel/travel_view.dart';
 import 'package:waygo/pages/account/account_list/account_list_view.dart';
 import 'package:waygo/pages/account/account_detail/account_detail_view.dart' as detail_view;
 import 'package:waygo/pages/account/account_record/account_record_view.dart' as record_view;
+import 'package:waygo/pages/map/demo/show_userlocation_mode_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -43,6 +44,11 @@ class HomePage extends StatelessWidget {
         icon: Icons.park,
         text: '景点详情',
         onTap: () { Get.to(() => const ScenicSpotDetailPage()); },
+      ),
+      _HomeCardData(
+        icon: Icons.my_location,
+        text: '百度地图官方示例',
+        onTap: () { Get.to(() => ShowUserLoationModePage()); },
       ),
     ];
     final List<_HomeCardData> group2 = [
@@ -363,12 +369,18 @@ Widget _buildHomeCard({
         children: [
           Icon(icon, size: 36, color: iconColor),
           SizedBox(height: 12),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 16,
-              color: fontColor,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 14,
+                color: fontColor,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
