@@ -45,7 +45,7 @@ class ItineraryItem {
   late final DateTime? endTime; // 结束时间
   late final Coordinate? coordinate; // 地理坐标
   late final int type; // 项目类型（景点，交通，住宿，餐饮，活动，购物，娱乐，备注）
-  late final int orderIndex; // 排序索引
+  late final int sort; // 排序索引
   late final int? trafficDetailId; // 交通信息
   late final int? accommodationDetailId; // 住宿信息
   late final int? foodDetailId; // 住宿信息
