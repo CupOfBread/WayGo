@@ -1,6 +1,6 @@
 class TravelPlanLuggage {
   late final int id;
-  late final int travelPlanId;
+  late final int? travelPlanId;
   late final int? userId;
   late final bool share = false;
   late final List<Luggage> luggageLis = [];
@@ -27,7 +27,7 @@ class Luggage {
   late final bool? isEssential; // 是否必需品
   late final bool? isFragile; // 是否易碎品
   late final bool? isValuable; // 是否贵重物品
-  late final bool isInSuitcase; // 是否已放入行李箱
+  late final bool isInSuitcase = false; // 是否已放入行李箱
 
   late final DateTime createTime;
   late final DateTime? updateTime;
