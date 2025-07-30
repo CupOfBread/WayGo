@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:waygo/pages/store/store_detail/store_detail_view.dart';
 import 'package:waygo/pages/store/store_list_view.dart';
+import '../map/demo/user_location_demo_view.dart';
 import '../scenic_spot/scenic_spot_detail_view.dart';
 import '../travel/travel_list/travel_list_view.dart';
 import 'home_logic.dart';
@@ -11,7 +12,6 @@ import 'package:waygo/pages/travel/travel_view.dart';
 import 'package:waygo/pages/account/account_list/account_list_view.dart';
 import 'package:waygo/pages/account/account_detail/account_detail_view.dart' as detail_view;
 import 'package:waygo/pages/account/account_record/account_record_view.dart' as record_view;
-import 'package:waygo/pages/map/demo/show_userlocation_mode_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
       _HomeCardData(
         icon: Icons.my_location,
         text: '百度地图官方示例',
-        onTap: () { Get.to(() => ShowUserLoationModePage()); },
+        onTap: () { Get.to(() => ShowUserLocationModePage()); },
       ),
     ];
     final List<_HomeCardData> group2 = [

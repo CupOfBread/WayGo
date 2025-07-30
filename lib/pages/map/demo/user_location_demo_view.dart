@@ -5,19 +5,67 @@ import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 
-import 'map_base_page_state.dart';
+/// 基础地图状态类
+class BMFBaseMapState<T extends StatefulWidget> extends State<T> {
+  late BMFMapController myMapController;
 
-/// 定位模式示例
-class ShowUserLoationModePage extends StatefulWidget {
-  ShowUserLoationModePage({Key? key}) : super(key: key);
+  late Size screenSize;
 
   @override
-  _ShowUserLoationModePageState createState() =>
-      _ShowUserLoationModePageState();
+  Widget build(BuildContext context) {
+    screenSize = MediaQuery.of(context).size;
+    return MaterialApp(
+      home: Scaffold(),
+    );
+  }
+
+  /// 创建完成回调
+  void onBMFMapCreated(BMFMapController controller) async {
+    myMapController = controller;
+    /// 地图加载回调
+    myMapController.setMapDidLoadCallback(callback: () {
+      print('mapDidLoad-地图加载完成');
+    });
+  }
+
+  /// 设置地图参数
+  BMFMapOptions initMapOptions() {
+    BMFMapOptions mapOptions = BMFMapOptions(
+      center: BMFCoordinate(39.917215, 116.380341),
+      zoomLevel: 12,
+    );
+    return mapOptions;
+  }
+
+  /// 创建地图
+  Container generateMap() {
+    return Container(
+      height: screenSize.height,
+      width: screenSize.width,
+      child: BMFMapWidget(
+        onBMFMapCreated: onBMFMapCreated,
+        mapOptions: initMapOptions(),
+      ),
+    );
+  }
+
+  /// 创建控制栏
+  Widget generateControlBar() {
+    throw UnimplementedError();
+  }
 }
 
-class _ShowUserLoationModePageState
-    extends BMFBaseMapState<ShowUserLoationModePage> {
+/// 定位模式示例
+class ShowUserLocationModePage extends StatefulWidget {
+  const ShowUserLocationModePage({super.key});
+
+  @override
+  _ShowUserLocationModePageState createState() =>
+      _ShowUserLocationModePageState();
+}
+
+class _ShowUserLocationModePageState
+    extends BMFBaseMapState<ShowUserLocationModePage> {
   /// 定位模式状态
   bool _showUserLocaion = true;
 
@@ -139,39 +187,35 @@ class _ShowUserLoationModePageState
                 ],
               ),
             ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Radio(
-                    value: BMFUserTrackingMode.Follow,
-                    groupValue: this._userTrackingMode,
-                    onChanged: (value) {
-                      setUserLocationMode(value as BMFUserTrackingMode);
-                    },
-                  ),
-                  Text(
-                    "跟随模式",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
+            Row(
+              children: <Widget>[
+                Radio(
+                  value: BMFUserTrackingMode.Follow,
+                  groupValue: this._userTrackingMode,
+                  onChanged: (value) {
+                    setUserLocationMode(value as BMFUserTrackingMode);
+                  },
+                ),
+                Text(
+                  "跟随模式",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Radio(
-                    value: BMFUserTrackingMode.FollowWithHeading,
-                    groupValue: this._userTrackingMode,
-                    onChanged: (value) {
-                      setUserLocationMode(value as BMFUserTrackingMode);
-                    },
-                  ),
-                  Text(
-                    "罗盘模式",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
+            Row(
+              children: <Widget>[
+                Radio(
+                  value: BMFUserTrackingMode.FollowWithHeading,
+                  groupValue: _userTrackingMode,
+                  onChanged: (value) {
+                    setUserLocationMode(value as BMFUserTrackingMode);
+                  },
+                ),
+                Text(
+                  "罗盘模式",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
             ),
           ],
         ));
@@ -261,4 +305,4 @@ class _ShowUserLoationModePageState
         pausesLocationUpdatesAutomatically: false);
     return options;
   }
-}
+} 
