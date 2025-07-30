@@ -150,7 +150,7 @@ class MapLogic extends GetxController {
         LogUtil.info("trueHeading: ${result.trueHeading}");
         LogUtil.info("magneticHeading: ${BMFHeading.fromMap(result.getMap()).magneticHeading}");
         if (Platform.isAndroid) {
-          state.bmfUserLocation.location!.course = result.trueHeading;
+          state.bmfUserLocation.location?.course = result.trueHeading;
         }
         if (Platform.isIOS) {
           state.bmfUserLocation.heading = BMFHeading.fromMap(result.getMap());
@@ -166,10 +166,7 @@ class MapLogic extends GetxController {
         state.longitude.value = result.longitude ?? 0.0;
         state.altitude.value = result.altitude ?? 0.0;
 
-        state.bmfUserLocation.location = BMFLocation(
-          coordinate: BMFCoordinate(state.latitude.value, state.longitude.value),
-        );
-
+        state.bmfUserLocation.location?.coordinate = BMFCoordinate(state.latitude.value, state.longitude.value);
         state.mapController.updateLocationData(state.bmfUserLocation);
       },
     );
