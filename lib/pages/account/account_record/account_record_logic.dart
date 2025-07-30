@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'account_record_state.dart';
 import 'package:waygo/model/account/account_record_type.dart';
 import 'package:waygo/model/account/account_record_category.dart';
-import 'package:waygo/model/user_info.dart';
+import 'package:waygo/model/user/user_info.dart';
 import 'package:waygo/service/account_data_service.dart';
 
 class AccountRecordLogic extends GetxController {
