@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart';
 import 'package:flutter_baidu_mapapi_map/flutter_baidu_mapapi_map.dart';
 import 'package:flutter_bmflocation/flutter_bmflocation.dart';
 import 'package:get/get.dart';
+import 'package:waygo/common/log_util.dart';
 import 'map_state.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
@@ -141,13 +144,22 @@ class MapLogic extends GetxController {
     Map androidMap = initAndroidOptions().getMap();
     Map iosMap = initIOSOptions().getMap();
     state.myLocPlugin.setAgreePrivacy(true);
+
     state.myLocPlugin.updateHeadingCallback(
       callback: (BaiduHeading result) {
-        state.bmfUserLocation.heading = BMFHeading(magneticHeading: result.magneticHeading);
-        // state.bmfUserLocation.location?.course = result.headingAccuracy;
-        // LogUtil.info(msg)
+        LogUtil.info("trueHeading: ${result.trueHeading}");
+        LogUtil.info("magneticHeading: ${BMFHeading.fromMap(result.getMap()).magneticHeading}");
+        if (Platform.isAndroid) {
+          state.bmfUserLocation.location!.course = result.trueHeading;
+        }
+        if (Platform.isIOS) {
+          state.bmfUserLocation.heading = BMFHeading.fromMap(result.getMap());
+        }
+        state.mapController.updateLocationData(state.bmfUserLocation);
+
       },
     );
+
     state.myLocPlugin.seriesLocationCallback(
       callback: (BaiduLocation result) {
         state.latitude.value = result.latitude ?? 0.0;
