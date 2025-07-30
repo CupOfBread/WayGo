@@ -17,6 +17,7 @@ class TravelPlan {
   late final DateTime createTime; // 创建时间
   late final DateTime? updateTime; // 更新时间
   late final List<TravelItinerary> itineraries; // 行程安排列表
+  late final int? shareLuggageId; //共享行李清单
 }
 
 /// 行程模型
