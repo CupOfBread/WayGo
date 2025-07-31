@@ -37,18 +37,6 @@ class TravelBillPage extends StatelessWidget {
         'date': '2025-07-18',
       },
       {
-        'type': '美食',
-        'desc': '青城山农家乐晚餐',
-        'amount': 90.0,
-        'date': '2025-07-18',
-      },
-      {
-        'type': '住宿',
-        'desc': '青城山下民宿',
-        'amount': 260.0,
-        'date': '2025-07-18',
-      },
-      {
         'type': '购物',
         'desc': '春熙路特产',
         'amount': 120.0,
@@ -78,21 +66,28 @@ class TravelBillPage extends StatelessWidget {
       '其他': Icons.more_horiz,
     };
 
-    return ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemCount: bills.length,
-      separatorBuilder: (context, index) => const SizedBox(height: 12),
-      itemBuilder: (context, index) {
-        final item = bills[index];
-        return Card(
-          child: ListTile(
-            leading: Icon(typeIcons[item['type']] ?? Icons.receipt, color: Colors.blue),
-            title: Text(item['desc'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text('${item['type']} · ${item['date']}'),
-            trailing: Text('￥${item['amount'].toStringAsFixed(2)}', style: const TextStyle(fontSize: 16, color: Colors.red)),
-          ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: bills.asMap().entries.map((entry) {
+          final index = entry.key;
+          final item = entry.value;
+          
+          return Column(
+            children: [
+              Card(
+                child: ListTile(
+                  leading: Icon(typeIcons[item['type']] ?? Icons.receipt, color: Colors.blue),
+                  title: Text(item['desc'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text('${item['type']} · ${item['date']}'),
+                  trailing: Text('￥${item['amount'].toStringAsFixed(2)}', style: const TextStyle(fontSize: 16, color: Colors.red)),
+                ),
+              ),
+              if (index < bills.length - 1) const SizedBox(height: 12),
+            ],
+          );
+        }).toList(),
+      ),
     );
   }
 } 

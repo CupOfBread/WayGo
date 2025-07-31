@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:waygo/model/travel/travel.dart';
 
 class TravelState {
-  TabController? tabController;
   List<String> tabs = ['行程', '账单', '行李'];
   RxInt tabIndex = 0.obs;
   

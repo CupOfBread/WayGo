@@ -18,12 +18,10 @@ class TravelLuggagePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(24, 12, 24, 4),
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 4),
           child: Card(
             elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             color: const Color(0xFFF7F7FA),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -35,11 +33,7 @@ class TravelLuggagePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                     padding: const EdgeInsets.all(4),
-                    child: const Icon(
-                      Icons.luggage,
-                      color: Colors.white,
-                      size: 16,
-                    ),
+                    child: const Icon(Icons.luggage, color: Colors.white, size: 16),
                   ),
                   const SizedBox(width: 8),
                   Text(
@@ -55,63 +49,82 @@ class TravelLuggagePage extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            separatorBuilder: (_, __) => const SizedBox(height: 8),
-            itemCount: logic.state.categories.length,
-            itemBuilder: (context, catIdx) {
-              final category = logic.state.categories[catIdx];
-              return Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  initiallyExpanded: true,
-                  leading: Container(
-                    decoration: BoxDecoration(
-                      color: category.color.withAlpha((0.15 * 255).toInt()),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.all(6),
-                    child: Icon(category.icon, color: category.color, size: 22),
-                  ),
-                  title: Text(
-                    category.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: category.color,
-                      fontSize: 16,
-                    ),
-                  ),
-                  children: category.items.map((item) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      child: Card(
-                        elevation: 0,
-                        color: item.checked.value ? const Color(0xFFE3F2FD) : Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        child: Obx(() => CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(
+            children:
+                logic.state.categories.asMap().entries.map((entry) {
+                  final catIdx = entry.key;
+                  final category = logic.state.categories[catIdx];
+
+                  return Column(
+                    children: [
+                      Theme(
+                        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                        child: ExpansionTile(
+                          initiallyExpanded: true,
+                          leading: Container(
+                            decoration: BoxDecoration(
+                              color: category.color.withAlpha((0.15 * 255).toInt()),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.all(6),
+                            child: Icon(category.icon, color: category.color, size: 22),
+                          ),
                           title: Text(
-                            item.name,
+                            category.name,
                             style: TextStyle(
-                              decoration: item.checked.value ? TextDecoration.lineThrough : null,
-                              color: item.checked.value ? Colors.grey : Colors.black87,
-                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: category.color,
+                              fontSize: 16,
                             ),
                           ),
-                          value: item.checked.value,
-                          activeColor: category.color,
-                          onChanged: (val) {
-                            logic.toggleItemChecked(catIdx, item, val ?? false);
-                          },
-                        )),
+                          children:
+                              category.items.map((item) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  child: Card(
+                                    elevation: 0,
+                                    color:
+                                        item.checked.value ? const Color(0xFFE3F2FD) : Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Obx(
+                                      () => CheckboxListTile(
+                                        controlAffinity: ListTileControlAffinity.trailing,
+                                        contentPadding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 0,
+                                        ),
+                                        title: Text(
+                                          item.name,
+                                          style: TextStyle(
+                                            decoration:
+                                                item.checked.value
+                                                    ? TextDecoration.lineThrough
+                                                    : null,
+                                            color:
+                                                item.checked.value ? Colors.grey : Colors.black87,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                        value: item.checked.value,
+                                        activeColor: category.color,
+                                        onChanged: (val) {
+                                          logic.toggleItemChecked(catIdx, item, val ?? false);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                        ),
                       ),
-                    );
-                  }).toList(),
-                ),
-              );
-            },
+                      if (catIdx < logic.state.categories.length - 1) const SizedBox(height: 8),
+                    ],
+                  );
+                }).toList(),
           ),
         ),
       ],

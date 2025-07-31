@@ -1,26 +1,18 @@
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'package:waygo/service/travel_data_service.dart';
 import 'travel_detail_state.dart';
 
-class TravelLogic extends GetxController with GetSingleTickerProviderStateMixin {
+class TravelLogic extends GetxController {
   final TravelState state = TravelState();
 
   @override
   void onInit() {
     super.onInit();
-    state.tabController = TabController(length: state.tabs.length, vsync: this);
-    state.tabController!.addListener(() {
-      if (!state.tabController!.indexIsChanging) {
-        state.tabIndex.value = state.tabController!.index;
-      }
-    });
   }
 
-  @override
-  void onClose() {
-    state.tabController?.dispose();
-    super.onClose();
+  /// 切换标签页
+  void switchTab(int index) {
+    state.tabIndex.value = index;
   }
 
   /// 根据ID加载旅行计划
@@ -28,10 +20,10 @@ class TravelLogic extends GetxController with GetSingleTickerProviderStateMixin 
     try {
       state.isLoading.value = true;
       state.errorMessage.value = '';
-      
+
       // 从service根据ID获取旅行计划
       final travelPlan = await TravelDataService.getTravelPlanById(travelPlanId);
-      
+
       if (travelPlan != null) {
         state.travelPlan.value = travelPlan;
       } else {
@@ -44,4 +36,4 @@ class TravelLogic extends GetxController with GetSingleTickerProviderStateMixin 
       state.isLoading.value = false;
     }
   }
-} 
+}
