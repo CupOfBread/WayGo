@@ -26,7 +26,9 @@ class HomePage extends StatelessWidget {
       _HomeCardData(
         icon: Icons.list_alt,
         text: '旅程列表',
-        onTap: () { Get.to(() => const TravelListPage()); },
+        onTap: () {
+          Get.to(() => const TravelListPage());
+        },
       ),
       _HomeCardData(
         icon: Icons.card_travel,
@@ -38,32 +40,40 @@ class HomePage extends StatelessWidget {
       _HomeCardData(
         icon: Icons.map,
         text: '地图',
-        onTap: () { Get.to(() => const MapPage()); },
+        onTap: () {
+          Get.to(() => const MapPage());
+        },
       ),
       _HomeCardData(
         icon: Icons.park,
         text: '景点详情',
-        onTap: () { Get.to(() => const ScenicSpotDetailPage()); },
+        onTap: () {
+          Get.to(() => const ScenicSpotDetailPage());
+        },
       ),
       _HomeCardData(
         icon: Icons.my_location,
         text: '百度地图官方示例',
-        onTap: () { Get.to(() => ShowUserLocationModePage()); },
+        onTap: () {
+          Get.to(() => ShowUserLocationModePage());
+        },
       ),
     ];
     final List<_HomeCardData> group2 = [
       _HomeCardData(
         icon: Icons.storefront,
         text: '店铺详情',
-        onTap: () { Get.to(() => const StoreDetailPage()); },
+        onTap: () {
+          Get.to(() => const StoreDetailPage());
+        },
       ),
       _HomeCardData(
         icon: Icons.view_module,
         text: '店铺列表',
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const StoreListPage()),
-          );
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => const StoreListPage()));
         },
       ),
     ];
@@ -71,29 +81,39 @@ class HomePage extends StatelessWidget {
       _HomeCardData(
         icon: Icons.login,
         text: '登录页',
-        onTap: () { Get.toNamed('/login'); },
+        onTap: () {
+          Get.toNamed('/login');
+        },
       ),
       _HomeCardData(
         icon: Icons.radio,
         text: '收音机',
-        onTap: () { Get.toNamed('/radio'); },
+        onTap: () {
+          Get.toNamed('/radio');
+        },
       ),
     ];
     final List<_HomeCardData> group4 = [
       _HomeCardData(
         icon: Icons.book,
         text: '账本列表',
-        onTap: () { Get.to(() => const AccountListPage()); },
+        onTap: () {
+          Get.to(() => const AccountListPage());
+        },
       ),
       _HomeCardData(
         icon: Icons.description,
         text: '账本详情',
-        onTap: () { Get.to(() => const detail_view.AccountDetailPage()); },
+        onTap: () {
+          Get.to(() => const detail_view.AccountDetailPage());
+        },
       ),
       _HomeCardData(
         icon: Icons.edit,
         text: '记一笔',
-        onTap: () { Get.to(() => const record_view.AccountRecordPage()); },
+        onTap: () {
+          Get.to(() => const record_view.AccountRecordPage());
+        },
       ),
     ];
     return Scaffold(
@@ -123,13 +143,7 @@ class HomePage extends StatelessWidget {
                       ),
                       _buildCardGroup(group1, cardWidth, isJourneyGroup: true),
                       const SizedBox(height: 24),
-                      Container(
-                        width: 340,
-                        child: Divider(
-                          color: Color(0xFFE0E0E0),
-                          thickness: 1,
-                        ),
-                      ),
+                      Container(width: 340, child: Divider(color: Color(0xFFE0E0E0), thickness: 1)),
                       const SizedBox(height: 24),
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
@@ -144,13 +158,7 @@ class HomePage extends StatelessWidget {
                       ),
                       _buildCardGroup(group4, cardWidth, isAccountGroup: true),
                       const SizedBox(height: 24),
-                      Container(
-                        width: 340,
-                        child: Divider(
-                          color: Color(0xFFE0E0E0),
-                          thickness: 1,
-                        ),
-                      ),
+                      Container(width: 340, child: Divider(color: Color(0xFFE0E0E0), thickness: 1)),
                       const SizedBox(height: 24),
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
@@ -165,13 +173,7 @@ class HomePage extends StatelessWidget {
                       ),
                       _buildCardGroup(group2, cardWidth, isShopGroup: true),
                       const SizedBox(height: 24),
-                      Container(
-                        width: 340,
-                        child: Divider(
-                          color: Color(0xFFE0E0E0),
-                          thickness: 1,
-                        ),
-                      ),
+                      Container(width: 340, child: Divider(color: Color(0xFFE0E0E0), thickness: 1)),
                       const SizedBox(height: 24),
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
@@ -197,7 +199,14 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget _buildCardGroup(List<_HomeCardData> cards, double cardWidth, {bool isJourneyGroup = false, bool isAccountGroup = false, bool isShopGroup = false, bool isOtherGroup = false}) {
+Widget _buildCardGroup(
+  List<_HomeCardData> cards,
+  double cardWidth, {
+  bool isJourneyGroup = false,
+  bool isAccountGroup = false,
+  bool isShopGroup = false,
+  bool isOtherGroup = false,
+}) {
   return GridView.count(
     crossAxisCount: 3,
     shrinkWrap: true,
@@ -205,102 +214,115 @@ Widget _buildCardGroup(List<_HomeCardData> cards, double cardWidth, {bool isJour
     mainAxisSpacing: 16,
     crossAxisSpacing: 12,
     childAspectRatio: cardWidth / 100,
-    children: cards.map((card) => _buildHomeCard(
-      width: cardWidth,
-      icon: card.icon,
-      text: card.text,
-      onTap: card.onTap,
-      gradient: isJourneyGroup
-        ? LinearGradient(
-            colors: [Color(0xFFC471F5), Color(0xFFFA71CD)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            transform: GradientRotation(45 * 3.1415926 / 180),
-          )
-        : isAccountGroup
-        ? LinearGradient(
-            colors: [
-              Color(0xFFF78CA0),
-              Color(0xFFF9748F),
-              Color(0xFFFD868C),
-              Color(0xFFFE9A8B),
-            ],
-            stops: [0.0, 0.19, 0.6, 1.0],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            transform: GradientRotation(45 * 3.1415926 / 180),
-          )
-        : isShopGroup
-        ? LinearGradient(
-            colors: [Color(0xFF64B3F4), Color(0xFFC2E59C)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            transform: GradientRotation(45 * 3.1415926 / 180),
-          )
-        : isOtherGroup
-        ? LinearGradient(
-            colors: [Color(0xFF6E45E2), Color(0xFF88D3CE)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            transform: GradientRotation(45 * 3.1415926 / 180),
-          )
-        : null,
-      fontColor: (isJourneyGroup || isAccountGroup || isShopGroup || isOtherGroup) ? Colors.white : Colors.black87,
-      iconColor: (isJourneyGroup || isAccountGroup || isShopGroup || isOtherGroup) ? Colors.white : Colors.black87,
-      boxShadow: isJourneyGroup
-        ? [
-            BoxShadow(
-              color: Color(0xFFB04BEA).withValues(alpha: 0.25),
-              blurRadius: 16,
-              offset: Offset(0, 6),
-            ),
-            BoxShadow(
-              color: Color(0xFFFA71CD).withValues(alpha: 0.12),
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ]
-        : isAccountGroup
-        ? [
-            BoxShadow(
-              color: Color(0xFFF9748F).withValues(alpha: 0.18),
-              blurRadius: 16,
-              offset: Offset(0, 6),
-            ),
-            BoxShadow(
-              color: Color(0xFFFD868C).withValues(alpha: 0.10),
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ]
-        : isShopGroup
-        ? [
-            BoxShadow(
-              color: Color(0xFF64B3F4).withValues(alpha: 0.18),
-              blurRadius: 16,
-              offset: Offset(0, 6),
-            ),
-            BoxShadow(
-              color: Color(0xFFC2E59C).withValues(alpha: 0.10),
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ]
-        : isOtherGroup
-        ? [
-            BoxShadow(
-              color: Color(0xFF6E45E2).withValues(alpha: 0.18),
-              blurRadius: 16,
-              offset: Offset(0, 6),
-            ),
-            BoxShadow(
-              color: Color(0xFF88D3CE).withValues(alpha: 0.10),
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ]
-        : null,
-    )).toList(),
+    children:
+        cards
+            .map(
+              (card) => _buildHomeCard(
+                width: cardWidth,
+                icon: card.icon,
+                text: card.text,
+                onTap: card.onTap,
+                gradient:
+                    isJourneyGroup
+                        ? LinearGradient(
+                          colors: [Color(0xFFC471F5), Color(0xFFFA71CD)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          transform: GradientRotation(45 * 3.1415926 / 180),
+                        )
+                        : isAccountGroup
+                        ? LinearGradient(
+                          colors: [
+                            Color(0xFFF78CA0),
+                            Color(0xFFF9748F),
+                            Color(0xFFFD868C),
+                            Color(0xFFFE9A8B),
+                          ],
+                          stops: [0.0, 0.19, 0.6, 1.0],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          transform: GradientRotation(45 * 3.1415926 / 180),
+                        )
+                        : isShopGroup
+                        ? LinearGradient(
+                          colors: [Color(0xFF64B3F4), Color(0xFFC2E59C)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          transform: GradientRotation(45 * 3.1415926 / 180),
+                        )
+                        : isOtherGroup
+                        ? LinearGradient(
+                          colors: [Color(0xFF6E45E2), Color(0xFF88D3CE)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          transform: GradientRotation(45 * 3.1415926 / 180),
+                        )
+                        : null,
+                fontColor:
+                    (isJourneyGroup || isAccountGroup || isShopGroup || isOtherGroup)
+                        ? Colors.white
+                        : Colors.black87,
+                iconColor:
+                    (isJourneyGroup || isAccountGroup || isShopGroup || isOtherGroup)
+                        ? Colors.white
+                        : Colors.black87,
+                boxShadow:
+                    isJourneyGroup
+                        ? [
+                          BoxShadow(
+                            color: Color(0xFFB04BEA).withValues(alpha: 0.25),
+                            blurRadius: 16,
+                            offset: Offset(0, 6),
+                          ),
+                          BoxShadow(
+                            color: Color(0xFFFA71CD).withValues(alpha: 0.12),
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ]
+                        : isAccountGroup
+                        ? [
+                          BoxShadow(
+                            color: Color(0xFFF9748F).withValues(alpha: 0.18),
+                            blurRadius: 16,
+                            offset: Offset(0, 6),
+                          ),
+                          BoxShadow(
+                            color: Color(0xFFFD868C).withValues(alpha: 0.10),
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ]
+                        : isShopGroup
+                        ? [
+                          BoxShadow(
+                            color: Color(0xFF64B3F4).withValues(alpha: 0.18),
+                            blurRadius: 16,
+                            offset: Offset(0, 6),
+                          ),
+                          BoxShadow(
+                            color: Color(0xFFC2E59C).withValues(alpha: 0.10),
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ]
+                        : isOtherGroup
+                        ? [
+                          BoxShadow(
+                            color: Color(0xFF6E45E2).withValues(alpha: 0.18),
+                            blurRadius: 16,
+                            offset: Offset(0, 6),
+                          ),
+                          BoxShadow(
+                            color: Color(0xFF88D3CE).withValues(alpha: 0.10),
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ]
+                        : null,
+              ),
+            )
+            .toList(),
   );
 }
 
@@ -308,38 +330,8 @@ class _HomeCardData {
   final IconData icon;
   final String text;
   final VoidCallback onTap;
-  _HomeCardData({
-    required this.icon,
-    required this.text,
-    required this.onTap,
-  });
-}
 
-// 修改 _buildHomeCard，添加点击缩放动画
-class _PressableCard extends StatefulWidget {
-  final Widget child;
-  final VoidCallback onTap;
-  const _PressableCard({required this.child, required this.onTap, Key? key}) : super(key: key);
-  @override
-  State<_PressableCard> createState() => _PressableCardState();
-}
-class _PressableCardState extends State<_PressableCard> {
-  double _scale = 1.0;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      onTapDown: (_) => setState(() => _scale = 0.95),
-      onTapUp: (_) => setState(() => _scale = 1.0),
-      onTapCancel: () => setState(() => _scale = 1.0),
-      child: AnimatedScale(
-        scale: _scale,
-        duration: Duration(milliseconds: 100),
-        curve: Curves.easeOut,
-        child: widget.child,
-      ),
-    );
-  }
+  _HomeCardData({required this.icon, required this.text, required this.onTap});
 }
 
 Widget _buildHomeCard({
@@ -352,7 +344,7 @@ Widget _buildHomeCard({
   Color iconColor = Colors.black87,
   List<BoxShadow>? boxShadow,
 }) {
-  return _PressableCard(
+  return GestureDetector(
     onTap: onTap,
     child: Container(
       width: width,
@@ -373,11 +365,7 @@ Widget _buildHomeCard({
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               text,
-              style: TextStyle(
-                fontSize: 14,
-                color: fontColor,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 14, color: fontColor, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
