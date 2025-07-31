@@ -18,7 +18,33 @@ class TicketAlbumPage extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('票根纪念册'),
+          title: const Text(
+            '票根纪念册',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF1A1A1A),
+            ),
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: const Color(0xFF1A1A1A),
+          elevation: 0,
+          centerTitle: true,
+          leading: IconButton(
+            icon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF0F0F0),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                size: 18,
+                color: Color(0xFF666666),
+              ),
+            ),
+            onPressed: () => Get.back(),
+          ),
           bottom: const TabBar(
             isScrollable: true,
             labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

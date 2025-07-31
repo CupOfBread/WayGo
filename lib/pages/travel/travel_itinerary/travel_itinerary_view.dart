@@ -28,25 +28,22 @@ class TravelItineraryPage extends StatelessWidget {
       {'type': 'note', 'title': '返程提醒', 'desc': '提前收拾好行李，预留充足时间前往机场。', 'image': null},
     ];
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children:
-            itinerary.map((item) {
-              switch (item['type']) {
-                case 'place':
-                  return _buildPlace(item);
-                case 'traffic':
-                  return _buildTraffic(item);
-                case 'hotel':
-                  return _buildHotel(item);
-                case 'note':
-                  return _buildNote(item);
-                default:
-                  return const SizedBox.shrink();
-              }
-            }).toList(),
-      ),
+    return Column(
+      children:
+          itinerary.map((item) {
+            switch (item['type']) {
+              case 'place':
+                return _buildPlace(item);
+              case 'traffic':
+                return _buildTraffic(item);
+              case 'hotel':
+                return _buildHotel(item);
+              case 'note':
+                return _buildNote(item);
+              default:
+                return const SizedBox.shrink();
+            }
+          }).toList(),
     );
   }
 

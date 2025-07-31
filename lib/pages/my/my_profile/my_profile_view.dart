@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'my_profile_logic.dart';
+import 'package:get/get.dart';
 
 class MyProfilePage extends StatelessWidget {
   const MyProfilePage({Key? key}) : super(key: key);
@@ -9,19 +10,33 @@ class MyProfilePage extends StatelessWidget {
     final logic = MyProfileLogic();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('个人主页'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {
-              // 编辑功能待实现
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('编辑功能待开发')),
-              );
-            },
+        title: const Text(
+          '个人资料',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF1A1A1A),
           ),
-        ],
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1A1A1A),
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF0F0F0),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 18,
+              color: Color(0xFF666666),
+            ),
+          ),
+          onPressed: () => Get.back(),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),

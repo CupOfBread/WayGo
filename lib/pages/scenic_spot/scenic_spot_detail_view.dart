@@ -11,7 +11,35 @@ class ScenicSpotDetailPage extends StatelessWidget {
     final logic = Get.put(ScenicSpotDetailLogic());
     final state = Get.find<ScenicSpotDetailLogic>().state;
     return Scaffold(
-      appBar: AppBar(title: const Text('景点详情'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text(
+          '景点详情',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF1A1A1A),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF1A1A1A),
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF0F0F0),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 18,
+              color: Color(0xFF666666),
+            ),
+          ),
+          onPressed: () => Get.back(),
+        ),
+      ),
       body: Obx(
         () => ListView(
           padding: const EdgeInsets.all(20),

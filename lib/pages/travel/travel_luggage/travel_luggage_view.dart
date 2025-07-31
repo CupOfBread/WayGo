@@ -17,115 +17,105 @@ class TravelLuggagePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 4),
-          child: Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            color: const Color(0xFFF7F7FA),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF4A90E2),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    padding: const EdgeInsets.all(4),
-                    child: const Icon(Icons.luggage, color: Colors.white, size: 16),
+        Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          color: const Color(0xFFF7F7FA),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF4A90E2),
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    '已整理 $checked/$total 件 物品',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+                  padding: const EdgeInsets.all(4),
+                  child: const Icon(Icons.luggage, color: Colors.white, size: 16),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '已整理 $checked/$total 件 物品',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(
-            children:
-                logic.state.categories.asMap().entries.map((entry) {
-                  final catIdx = entry.key;
-                  final category = logic.state.categories[catIdx];
+        Column(
+          children:
+              logic.state.categories.asMap().entries.map((entry) {
+                final catIdx = entry.key;
+                final category = logic.state.categories[catIdx];
 
-                  return Column(
-                    children: [
-                      Theme(
-                        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                        child: ExpansionTile(
-                          initiallyExpanded: true,
-                          leading: Container(
-                            decoration: BoxDecoration(
-                              color: category.color.withAlpha((0.15 * 255).toInt()),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.all(6),
-                            child: Icon(category.icon, color: category.color, size: 22),
+                return Column(
+                  children: [
+                    Theme(
+                      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        initiallyExpanded: true,
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            color: category.color.withAlpha((0.15 * 255).toInt()),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          title: Text(
-                            category.name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: category.color,
-                              fontSize: 16,
-                            ),
+                          padding: const EdgeInsets.all(6),
+                          child: Icon(category.icon, color: category.color, size: 22),
+                        ),
+                        title: Text(
+                          category.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: category.color,
+                            fontSize: 15,
                           ),
-                          children:
-                              category.items.map((item) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                  child: Card(
-                                    elevation: 0,
-                                    color:
-                                        item.checked.value ? const Color(0xFFE3F2FD) : Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Obx(
-                                      () => CheckboxListTile(
-                                        controlAffinity: ListTileControlAffinity.trailing,
-                                        contentPadding: const EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 0,
+                        ),
+                        children:
+                            category.items.map((item) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: Card(
+                                  elevation: 0,
+                                  color:
+                                      item.checked.value ? const Color(0xFFE3F2FD) : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Obx(
+                                    () => CheckboxListTile(
+                                      controlAffinity: ListTileControlAffinity.trailing,
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                                      title: Text(
+                                        item.name,
+                                        style: TextStyle(
+                                          decoration:
+                                              item.checked.value
+                                                  ? TextDecoration.lineThrough
+                                                  : null,
+                                          color: item.checked.value ? Colors.grey : Colors.black87,
+                                          fontSize: 13,
                                         ),
-                                        title: Text(
-                                          item.name,
-                                          style: TextStyle(
-                                            decoration:
-                                                item.checked.value
-                                                    ? TextDecoration.lineThrough
-                                                    : null,
-                                            color:
-                                                item.checked.value ? Colors.grey : Colors.black87,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        value: item.checked.value,
-                                        activeColor: category.color,
-                                        onChanged: (val) {
-                                          logic.toggleItemChecked(catIdx, item, val ?? false);
-                                        },
                                       ),
+                                      value: item.checked.value,
+                                      activeColor: category.color,
+                                      onChanged: (val) {
+                                        logic.toggleItemChecked(catIdx, item, val ?? false);
+                                      },
                                     ),
                                   ),
-                                );
-                              }).toList(),
-                        ),
+                                ),
+                              );
+                            }).toList(),
                       ),
-                      if (catIdx < logic.state.categories.length - 1) const SizedBox(height: 8),
-                    ],
-                  );
-                }).toList(),
-          ),
+                    ),
+                    if (catIdx < logic.state.categories.length - 1) const SizedBox(height: 8),
+                  ],
+                );
+              }).toList(),
         ),
       ],
     );
