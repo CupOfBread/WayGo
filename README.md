@@ -5,7 +5,6 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.19.0-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.3.0-blue.svg)](https://dart.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 *让每一次旅行都充满惊喜和温暖* 💕
 </div>
