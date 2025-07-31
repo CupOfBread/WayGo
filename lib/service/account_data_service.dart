@@ -17,23 +17,23 @@ class AccountDataService {
 
   static Future<void> initDefaultAccountRecordData() async {
     final types = [
-      AccountRecordType('expense', '', id: 1, name: '支出', isSysDefault: true, direction: -1),
-      AccountRecordType('income', '', id: 2, name: '收入', isSysDefault: true, direction: 1),
-      AccountRecordType('transfer', '', id: 3, name: '转账', isSysDefault: true, direction: -1),
-      AccountRecordType('balance', '', id: 4, name: '余额', isSysDefault: true, direction: 1),
-      AccountRecordType('refund', '', id: 5, name: '退款', isSysDefault: true, direction: 1),
+      const AccountRecordType(id: 1, code: 'expense', name: '支出', iconUrl: '', isSysDefault: true, direction: -1),
+      const AccountRecordType(id: 2, code: 'income', name: '收入', iconUrl: '', isSysDefault: true, direction: 1),
+      const AccountRecordType(id: 3, code: 'transfer', name: '转账', iconUrl: '', isSysDefault: true, direction: -1),
+      const AccountRecordType(id: 4, code: 'balance', name: '余额', iconUrl: '', isSysDefault: true, direction: 1),
+      const AccountRecordType(id: 5, code: 'refund', name: '退款', iconUrl: '', isSysDefault: true, direction: 1),
     ];
     final categories = [
-      AccountRecordCategory('scenic', '', id: 1, name: '景点', isSysDefault: true),
-      AccountRecordCategory('food', '', id: 2, name: '餐饮', isSysDefault: true),
-      AccountRecordCategory('hotel', '', id: 3, name: '住宿', isSysDefault: true),
-      AccountRecordCategory('traffic', '', id: 4, name: '交通', isSysDefault: true),
-      AccountRecordCategory('shopping', '', id: 5, name: '购物', isSysDefault: true),
-      AccountRecordCategory('entertainment', '', id: 6, name: '娱乐', isSysDefault: true),
-      AccountRecordCategory('other', '', id: 7, name: '其他', isSysDefault: true),
-      AccountRecordCategory('communication', '', id: 8, name: '通讯', isSysDefault: true),
-      AccountRecordCategory('medical', '', id: 9, name: '医疗', isSysDefault: true),
-      AccountRecordCategory('relationship', '', id: 10, name: '人情', isSysDefault: true),
+      const AccountRecordCategory(id: 1, code: 'scenic', name: '景点', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 2, code: 'food', name: '餐饮', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 3, code: 'hotel', name: '住宿', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 4, code: 'traffic', name: '交通', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 5, code: 'shopping', name: '购物', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 6, code: 'entertainment', name: '娱乐', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 7, code: 'other', name: '其他', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 8, code: 'communication', name: '通讯', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 9, code: 'medical', name: '医疗', iconUrl: '', isSysDefault: true),
+      const AccountRecordCategory(id: 10, code: 'relationship', name: '人情', iconUrl: '', isSysDefault: true),
     ];
     await saveAccountRecordData(types: types, categories: categories);
   }

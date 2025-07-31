@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'package:waygo/common/log_util.dart';
 import 'package:waygo/service/account_data_service.dart';
+import 'package:waygo/service/travel_data_service.dart';
 
 Future<void> setupServiceLocator() async {
   await _requestLocationPermission();
@@ -61,4 +62,7 @@ void initDio() {
 
 Future<void> initData() async {
   await AccountDataService.initDefaultAccountRecordData();
+  // 清理旧数据并初始化只有2个旅行计划的默认数据
+  await TravelDataService.clearAllTravelData();
+  await TravelDataService.initDefaultTravelData();
 }

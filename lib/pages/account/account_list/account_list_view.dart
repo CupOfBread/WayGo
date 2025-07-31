@@ -9,44 +9,44 @@ class AccountListPage extends StatelessWidget {
   // 本地生成5个账本数据
   List<AccountBook> get _accountBooks => [
         AccountBook(
-          'https://picsum.photos/seed/life/80', // coverUrl
-          '记录日常生活收支', // description
-          DateTime(2024, 1, 1), // createTime
-          1001, // ownerId
           id: 1,
+          ownerId: 1001,
           name: '生活账本',
+          coverUrl: 'https://picsum.photos/seed/life/80',
+          description: '记录日常生活收支',
+          createTime: DateTime(2024, 1, 1),
         ),
         AccountBook(
-          'https://picsum.photos/seed/travel/80',
-          '记录旅行花费',
-          DateTime(2023, 7, 15),
-          1001,
           id: 2,
+          ownerId: 1001,
           name: '旅行账本',
+          coverUrl: 'https://picsum.photos/seed/travel/80',
+          description: '记录旅行花费',
+          createTime: DateTime(2023, 7, 15),
         ),
         AccountBook(
-          'https://picsum.photos/seed/work/80',
-          '工作相关账目',
-          DateTime(2022, 3, 10),
-          1001,
           id: 3,
+          ownerId: 1001,
           name: '工作账本',
+          coverUrl: 'https://picsum.photos/seed/work/80',
+          description: '工作相关账目',
+          createTime: DateTime(2022, 3, 10),
         ),
         AccountBook(
-          'https://picsum.photos/seed/study/80',
-          '学习支出记录',
-          DateTime(2021, 9, 1),
-          1001,
           id: 4,
+          ownerId: 1001,
           name: '学习账本',
+          coverUrl: 'https://picsum.photos/seed/study/80',
+          description: '学习支出记录',
+          createTime: DateTime(2021, 9, 1),
         ),
         AccountBook(
-          'https://picsum.photos/seed/family/80',
-          '家庭收支',
-          DateTime(2020, 5, 20),
-          1001,
           id: 5,
+          ownerId: 1001,
           name: '家庭账本',
+          coverUrl: 'https://picsum.photos/seed/family/80',
+          description: '家庭收支',
+          createTime: DateTime(2020, 5, 20),
         ),
       ];
 
