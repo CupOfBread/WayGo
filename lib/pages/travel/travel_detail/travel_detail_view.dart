@@ -196,6 +196,8 @@ class TravelPage extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 const SizedBox(height: 4),
                                 Row(
@@ -210,7 +212,9 @@ class TravelPage extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
-                                      '${travelPlan.startDate.year}.${travelPlan.startDate.month.toString().padLeft(2, '0')}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.year}.${travelPlan.endDate.month.toString().padLeft(2, '0')}.${travelPlan.endDate.day.toString().padLeft(2, '0')}',
+                                      travelPlan.startDate.year == travelPlan.endDate.year
+                                          ? '${travelPlan.startDate.month}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.month}.${travelPlan.endDate.day.toString().padLeft(2, '0')}'
+                                          : '${travelPlan.startDate.year}.${travelPlan.startDate.month}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.year}.${travelPlan.endDate.month}.${travelPlan.endDate.day.toString().padLeft(2, '0')}',
                                       style: const TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
@@ -227,18 +231,21 @@ class TravelPage extends StatelessWidget {
                     ),
                     // 详细信息区域
                     Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                       child: Column(
                         children: [
-                          // 标签信息
+                          // 第一行标签：状态、天数、里程
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              _buildStatusChip(travelPlan.status),
+                              const SizedBox(width: 8),
                               _buildInfoChip(
                                 icon: Icons.calendar_today,
                                 label: '${travelPlan.totalDays}天${travelPlan.totalDays - 1}晚',
                                 color: const Color(0xFF6C63FF),
                               ),
-                              const SizedBox(width: 12),
+                              const SizedBox(width: 8),
                               _buildInfoChip(
                                 icon: Icons.straighten,
                                 label:
@@ -246,6 +253,120 @@ class TravelPage extends StatelessWidget {
                                         ? '${travelPlan.totalDistance!.toStringAsFixed(1)}km'
                                         : '距离未设置',
                                 color: const Color(0xFF4CAF50),
+                              ),
+                              const Spacer(),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          // 第二行标签：自定义标签
+                          if (travelPlan.tags != null && travelPlan.tags!.isNotEmpty)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ...travelPlan.tags!
+                                    .split(',')
+                                    .map((tag) => tag.trim())
+                                    .where((tag) => tag.isNotEmpty)
+                                    .map((tag) => _buildTagChip(tag))
+                                    .toList()
+                                    .asMap()
+                                    .entries
+                                    .map((entry) => [
+                                          if (entry.key > 0) const SizedBox(width: 8),
+                                          entry.value,
+                                        ])
+                                    .expand((widgets) => widgets)
+                                    .toList(),
+                                const Spacer(),
+                              ],
+                            ),
+                          if (travelPlan.tags != null && travelPlan.tags!.isNotEmpty)
+                            const SizedBox(height: 16),
+                          // 描述信息
+                          if (travelPlan.description != null && travelPlan.description!.isNotEmpty) ...[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: const Icon(
+                                    Icons.description_outlined,
+                                    size: 14,
+                                    color: Color(0xFF6C63FF),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '计划描述',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xFF6C63FF),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        travelPlan.description!,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Color(0xFF333333),
+                                          height: 1.4,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                          const SizedBox(height: 8),
+                          // 创建时间信息
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF4CAF50).withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: const Icon(
+                                  Icons.schedule_outlined,
+                                  size: 14,
+                                  color: Color(0xFF4CAF50),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '创建时间',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF4CAF50),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      '${travelPlan.createTime.year}-${travelPlan.createTime.month.toString().padLeft(2, '0')}-${travelPlan.createTime.day.toString().padLeft(2, '0')} ${travelPlan.createTime.hour.toString().padLeft(2, '0')}:${travelPlan.createTime.minute.toString().padLeft(2, '0')}',
+                                      style: const TextStyle(
+                                        fontSize: 13,
+                                        color: Color(0xFF333333),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -351,19 +472,88 @@ class TravelPage extends StatelessWidget {
 
   Widget _buildInfoChip({required IconData icon, required String label, required Color color}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: color),
-          const SizedBox(width: 6),
-          Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color)),
+          Icon(icon, size: 14, color: color),
+          const SizedBox(width: 4),
+          Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: color)),
         ],
+      ),
+    );
+  }
+
+  Widget _buildStatusChip(int status) {
+    String statusText;
+    Color statusColor;
+    IconData statusIcon;
+
+    switch (status) {
+      case 0:
+        statusText = '规划中';
+        statusColor = const Color(0xFFFF9800);
+        statusIcon = Icons.edit;
+        break;
+      case 1:
+        statusText = '进行中';
+        statusColor = const Color(0xFF4CAF50);
+        statusIcon = Icons.play_arrow;
+        break;
+      case 2:
+        statusText = '已完成';
+        statusColor = const Color(0xFF2196F3);
+        statusIcon = Icons.check_circle;
+        break;
+      case 3:
+        statusText = '已取消';
+        statusColor = const Color(0xFFF44336);
+        statusIcon = Icons.cancel;
+        break;
+      default:
+        statusText = '未知状态';
+        statusColor = const Color(0xFF9E9E9E);
+        statusIcon = Icons.help;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: statusColor.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: statusColor.withValues(alpha: 0.3), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(statusIcon, size: 14, color: statusColor),
+          const SizedBox(width: 4),
+          Text(statusText, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: statusColor)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTagChip(String tag) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFF9800).withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFFF9800).withValues(alpha: 0.3), width: 1),
+      ),
+      child: Text(
+        tag,
+        style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          color: Color(0xFFFF9800),
+        ),
       ),
     );
   }
