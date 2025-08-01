@@ -46,22 +46,97 @@ class TravelBillPage extends StatelessWidget {
               ],
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('账单统计', style: TextStyle(fontSize: 16, color: Colors.grey)),
-                const SizedBox(height: 8),
-                const Text(
-                  '暂无数据',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey),
+                // 总支出标题
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(Icons.account_balance_wallet, color: Colors.blue, size: 13),
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      '总支出',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
-                // 占位内容
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Text('统计信息', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                const SizedBox(height: 12),
+
+                // 总支出金额
+                const Text('¥ 2,580.00', style: TextStyle(fontSize: 26, color: Colors.black87)),
+                const SizedBox(height: 12),
+
+                // 进度条和预算信息
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 进度条
+                    Container(
+                      width: double.infinity,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withValues(alpha: 0.3),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: FractionallySizedBox(
+                        alignment: Alignment.centerLeft,
+                        widthFactor: 0.65, // 65% 的进度
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                            ),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+
+                    // 预算信息行
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // 总预算
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('总预算', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                            const SizedBox(height: 4),
+                            const Text(
+                              '¥4,000.00',
+                              style: TextStyle(fontSize: 15, color: Color(0xFF4C4C4C)),
+                            ),
+                          ],
+                        ),
+
+                        // 剩余金额
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text('剩余', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                            const SizedBox(height: 4),
+                            const Text(
+                              '¥1,420.00',
+                              style: TextStyle(fontSize: 15, color: Color(0xFF424242)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
