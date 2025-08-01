@@ -243,7 +243,7 @@ class TravelDataService {
     // 创建示例旅行计划1
     final samplePlan1 = TravelPlan(
       id: 1,
-      title: '赛博8D成都3天2晚热辣滚烫之旅',
+      title: '赛博8D成都3天2晚热辣滚烫之旅旅旅旅旅旅旅旅（测试超长标题会不会有异常）',
       description: '体验成都的现代与古典，品尝正宗川菜',
       tags: '美食,文化,休闲',
       startDate: DateTime(2025, 7, 23),

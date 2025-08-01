@@ -42,6 +42,20 @@ class TravelPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
       ),
+      floatingActionButton: Obx(() {
+        if (state.tabIndex.value == 0) {
+          return FloatingActionButton.extended(
+            onPressed: () {
+              print('新增项目');
+            },
+            backgroundColor: const Color(0xFF6C63FF),
+            foregroundColor: Colors.white,
+            elevation: 4,
+            label: const Text('新增项目', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          );
+        }
+        return const SizedBox.shrink();
+      }),
       body: Obx(() {
         if (state.isLoading.value) {
           return const Center(
@@ -141,7 +155,7 @@ class TravelPage extends StatelessWidget {
             // 头部信息卡片
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -155,9 +169,8 @@ class TravelPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    // 封面图片区域
                     Container(
-                      height: 120,
+                      height: 130,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -183,47 +196,50 @@ class TravelPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Positioned(
-                            left: 20,
-                            bottom: 20,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  travelPlan.title,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    travelPlan.title,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(height: 4),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 4,
-                                      height: 4,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 4,
+                                        height: 4,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      travelPlan.startDate.year == travelPlan.endDate.year
-                                          ? '${travelPlan.startDate.month}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.month}.${travelPlan.endDate.day.toString().padLeft(2, '0')}'
-                                          : '${travelPlan.startDate.year}.${travelPlan.startDate.month}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.year}.${travelPlan.endDate.month}.${travelPlan.endDate.day.toString().padLeft(2, '0')}',
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        travelPlan.startDate.year == travelPlan.endDate.year
+                                            ? '${travelPlan.startDate.month}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.month}.${travelPlan.endDate.day.toString().padLeft(2, '0')}'
+                                            : '${travelPlan.startDate.year}.${travelPlan.startDate.month}.${travelPlan.startDate.day.toString().padLeft(2, '0')} - ${travelPlan.endDate.year}.${travelPlan.endDate.month}.${travelPlan.endDate.day.toString().padLeft(2, '0')}',
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -271,10 +287,12 @@ class TravelPage extends StatelessWidget {
                                     .toList()
                                     .asMap()
                                     .entries
-                                    .map((entry) => [
-                                          if (entry.key > 0) const SizedBox(width: 8),
-                                          entry.value,
-                                        ])
+                                    .map(
+                                      (entry) => [
+                                        if (entry.key > 0) const SizedBox(width: 8),
+                                        entry.value,
+                                      ],
+                                    )
                                     .expand((widgets) => widgets)
                                     .toList(),
                                 const Spacer(),
@@ -283,7 +301,8 @@ class TravelPage extends StatelessWidget {
                           if (travelPlan.tags != null && travelPlan.tags!.isNotEmpty)
                             const SizedBox(height: 16),
                           // 描述信息
-                          if (travelPlan.description != null && travelPlan.description!.isNotEmpty) ...[
+                          if (travelPlan.description != null &&
+                              travelPlan.description!.isNotEmpty) ...[
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -370,7 +389,7 @@ class TravelPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 14),
                           // 标签切换
                           Container(
                             decoration: BoxDecoration(
@@ -388,7 +407,7 @@ class TravelPage extends StatelessWidget {
                                       child: GestureDetector(
                                         onTap: () => logic.switchTab(index),
                                         child: Container(
-                                          padding: const EdgeInsets.symmetric(vertical: 12),
+                                          padding: const EdgeInsets.symmetric(vertical: 6),
                                           decoration: BoxDecoration(
                                             color: isSelected ? Colors.white : Colors.transparent,
                                             borderRadius: BorderRadius.circular(16),
@@ -407,9 +426,9 @@ class TravelPage extends StatelessWidget {
                                             tab,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 14,
                                               fontWeight:
-                                                  isSelected ? FontWeight.w600 : FontWeight.w500,
+                                                  isSelected ? FontWeight.w600 : FontWeight.w400,
                                               color:
                                                   isSelected
                                                       ? const Color(0xFF6C63FF)
@@ -432,7 +451,7 @@ class TravelPage extends StatelessWidget {
             // 内容区域
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -533,7 +552,10 @@ class TravelPage extends StatelessWidget {
         children: [
           Icon(statusIcon, size: 14, color: statusColor),
           const SizedBox(width: 4),
-          Text(statusText, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: statusColor)),
+          Text(
+            statusText,
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: statusColor),
+          ),
         ],
       ),
     );
@@ -549,11 +571,7 @@ class TravelPage extends StatelessWidget {
       ),
       child: Text(
         tag,
-        style: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: Color(0xFFFF9800),
-        ),
+        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFFFF9800)),
       ),
     );
   }
