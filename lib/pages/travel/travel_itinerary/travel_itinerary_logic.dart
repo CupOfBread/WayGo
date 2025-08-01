@@ -452,10 +452,14 @@ class TravelItineraryLogic extends GetxController {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              item['mode'] == '自驾' ? Icons.directions_car : Icons.directions_transit,
-              color: Colors.grey,
-              size: 20,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              alignment: Alignment.center,
+              child: Icon(
+                item['mode'] == '自驾' ? Icons.directions_car : Icons.directions_transit,
+                color: Colors.grey,
+                size: 20,
+              ),
             ),
             const SizedBox(width: 10),
             Expanded(

@@ -54,6 +54,17 @@ class TravelPage extends StatelessWidget {
             label: const Text('新增项目', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
           );
         }
+        if (state.tabIndex.value == 1) {
+          return FloatingActionButton.extended(
+            onPressed: () {
+              print('记账');
+            },
+            backgroundColor: const Color(0xFF6C63FF),
+            foregroundColor: Colors.white,
+            elevation: 4,
+            label: const Text('记账', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          );
+        }
         return const SizedBox.shrink();
       }),
       body: Obx(() {
