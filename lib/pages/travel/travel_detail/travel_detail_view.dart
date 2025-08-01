@@ -255,15 +255,15 @@ class TravelPage extends StatelessWidget {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _buildStatusChip(travelPlan.status),
+                              logic.buildStatusChip(travelPlan.status),
                               const SizedBox(width: 8),
-                              _buildInfoChip(
+                              logic.buildInfoChip(
                                 icon: Icons.calendar_today,
                                 label: '${travelPlan.totalDays}天${travelPlan.totalDays - 1}晚',
                                 color: const Color(0xFF6C63FF),
                               ),
                               const SizedBox(width: 8),
-                              _buildInfoChip(
+                              logic.buildInfoChip(
                                 icon: Icons.straighten,
                                 label:
                                     travelPlan.totalDistance?.toStringAsFixed(1) != null
@@ -284,7 +284,7 @@ class TravelPage extends StatelessWidget {
                                     .split(',')
                                     .map((tag) => tag.trim())
                                     .where((tag) => tag.isNotEmpty)
-                                    .map((tag) => _buildTagChip(tag))
+                                    .map((tag) => logic.buildTagChip(tag))
                                     .toList()
                                     .asMap()
                                     .entries
@@ -450,130 +450,23 @@ class TravelPage extends StatelessWidget {
               ),
             ),
             // 内容区域
-            SliverToBoxAdapter(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 15,
-                      offset: const Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Obx(() {
-                    LogUtil.info('当前index: ${state.tabIndex.value}');
-                    switch (state.tabIndex.value) {
-                      case 0:
-                        return const TravelItineraryPage();
-                      case 1:
-                        return const TravelBillPage();
-                      case 2:
-                        return const TravelLuggagePage();
-                      default:
-                        return const SizedBox.shrink();
-                    }
-                  }),
-                ),
-              ),
-            ),
+            Obx(() {
+              LogUtil.info('当前index: ${state.tabIndex.value}');
+              switch (state.tabIndex.value) {
+                case 0:
+                  return const TravelItineraryPage();
+                case 1:
+                  return const TravelBillPage();
+                case 2:
+                  return const TravelLuggagePage();
+                default:
+                  return const SizedBox.shrink();
+              }
+            }),
             const SliverToBoxAdapter(child: SizedBox(height: 20)),
           ],
         );
       }),
-    );
-  }
-
-  Widget _buildInfoChip({required IconData icon, required String label, required Color color}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: color),
-          const SizedBox(width: 4),
-          Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: color)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatusChip(int status) {
-    String statusText;
-    Color statusColor;
-    IconData statusIcon;
-
-    switch (status) {
-      case 0:
-        statusText = '规划中';
-        statusColor = const Color(0xFFFF9800);
-        statusIcon = Icons.edit;
-        break;
-      case 1:
-        statusText = '进行中';
-        statusColor = const Color(0xFF4CAF50);
-        statusIcon = Icons.play_arrow;
-        break;
-      case 2:
-        statusText = '已完成';
-        statusColor = const Color(0xFF2196F3);
-        statusIcon = Icons.check_circle;
-        break;
-      case 3:
-        statusText = '已取消';
-        statusColor = const Color(0xFFF44336);
-        statusIcon = Icons.cancel;
-        break;
-      default:
-        statusText = '未知状态';
-        statusColor = const Color(0xFF9E9E9E);
-        statusIcon = Icons.help;
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: statusColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: statusColor.withValues(alpha: 0.3), width: 1),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(statusIcon, size: 14, color: statusColor),
-          const SizedBox(width: 4),
-          Text(
-            statusText,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: statusColor),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTagChip(String tag) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFF9800).withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFFF9800).withValues(alpha: 0.3), width: 1),
-      ),
-      child: Text(
-        tag,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFFFF9800)),
-      ),
     );
   }
 }
