@@ -28,51 +28,33 @@ class TravelItineraryPage extends StatelessWidget {
         );
       }
 
-      return SingleChildScrollView(
-        child: Column(
-          children:
-              state.itineraryItems.asMap().entries.map((entry) {
-                final index = entry.key;
-                final item = entry.value;
-                switch (item['type']) {
-                  case 'traffic':
-                    return _buildTraffic(item, index);
-                  default:
-                    return logic.buildGeneralItem(item, index);
-                }
-              }).toList(),
-        ),
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // 天数标签组件
+          logic.buildDayTags(),
+          // 行程内容
+          Flexible(
+            child: SingleChildScrollView(
+              child: Column(
+                children:
+                    state.itineraryItems.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final item = entry.value;
+                      switch (item['type']) {
+                        case 'traffic':
+                          return logic.buildTrafficItem(item, index);
+                        default:
+                          return logic.buildGeneralItem(item, index);
+                      }
+                    }).toList(),
+              ),
+            ),
+          ),
+        ],
       );
     });
   }
 
-  Widget _buildTraffic(Map<String, dynamic> item, int index) {
-    return Card(
-      color: Colors.transparent,
-      elevation: 0,
-      shadowColor: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              item['mode'] == '自驾' ? Icons.directions_car : Icons.directions_transit,
-              color: Colors.grey,
-              size: 20,
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                '${item['mode'] ?? ''}${item['desc'] != null ? ' - ${item['desc']}' : ''}',
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  
 }

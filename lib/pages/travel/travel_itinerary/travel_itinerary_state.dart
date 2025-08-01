@@ -17,7 +17,10 @@ class TravelItineraryState {
   RxInt editingItemIndex = (-1).obs;
 
   // 筛选状态
-  RxString selectedFilter = 'all'.obs; // all, place, traffic, hotel, note
+  RxString selectedFilter = 'all'.obs;
+
+  // 标签状态
+  RxInt selectedDayIndex = 0.obs; // 选中的天数索引
 
   TravelItineraryState() {
     /// 初始化变量

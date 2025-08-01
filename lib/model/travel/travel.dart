@@ -240,7 +240,7 @@ class ItineraryItem {
   final DateTime? startTime; // 开始时间
   final DateTime? endTime; // 结束时间
   final Coordinate? coordinate; // 地理坐标
-  final int type; // 项目类型（景点，交通，住宿，餐饮，活动，购物，娱乐，备注）
+  final int type; // 项目类型（1景点，2交通，3住宿，4餐饮，5活动，6购物，7娱乐，8备注）
   final int sort; // 排序索引
   final int? trafficDetailId; // 交通信息
   final int? accommodationDetailId; // 住宿信息
