@@ -11,16 +11,12 @@ class TravelListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final logic = Get.put(TravelListLogic());
     final state = logic.state;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           '旅程列表',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF1A1A1A),
-          ),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color(0xFF1A1A1A)),
         ),
         backgroundColor: Colors.white,
         foregroundColor: const Color(0xFF1A1A1A),
@@ -33,11 +29,7 @@ class TravelListPage extends StatelessWidget {
               color: const Color(0xFFF0F0F0),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(
-              Icons.arrow_back_ios_new,
-              size: 18,
-              color: Color(0xFF666666),
-            ),
+            child: const Icon(Icons.arrow_back_ios_new, size: 18, color: Color(0xFF666666)),
           ),
           onPressed: () => Get.back(),
         ),
@@ -49,11 +41,7 @@ class TravelListPage extends StatelessWidget {
                 color: const Color(0xFFF0F0F0),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
-                Icons.refresh,
-                size: 18,
-                color: Color(0xFF666666),
-              ),
+              child: const Icon(Icons.refresh, size: 18, color: Color(0xFF666666)),
             ),
             onPressed: () => logic.refreshData(),
           ),
@@ -62,11 +50,9 @@ class TravelListPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Obx(() {
         if (state.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
-        
+
         if (state.errorMessage.value.isNotEmpty) {
           return Center(
             child: Column(
@@ -78,21 +64,16 @@ class TravelListPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () => logic.refreshData(),
-                  child: const Text('重试'),
-                ),
+                ElevatedButton(onPressed: () => logic.refreshData(), child: const Text('重试')),
               ],
             ),
           );
         }
-        
+
         if (state.travels.isEmpty) {
-          return const Center(
-            child: Text('暂无旅程数据'),
-          );
+          return const Center(child: Text('暂无旅程数据'));
         }
-        
+
         return RefreshIndicator(
           onRefresh: logic.refreshData,
           child: ListView.builder(
@@ -114,6 +95,7 @@ class TravelListPage extends StatelessWidget {
 
 class _TravelCard extends StatelessWidget {
   final TravelPlan travel;
+
   const _TravelCard({required this.travel});
 
   @override
@@ -121,13 +103,14 @@ class _TravelCard extends StatelessWidget {
     // 计算旅程时长
     final duration = travel.endDate.difference(travel.startDate).inDays + 1;
     final durationText = '${duration}天${duration - 1}晚';
-    
+
     // 格式化出发日期
-    final departureDate = '${travel.startDate.year}.${travel.startDate.month.toString().padLeft(2, '0')}.${travel.startDate.day.toString().padLeft(2, '0')}';
-    
+    final departureDate =
+        '${travel.startDate.year}.${travel.startDate.month.toString().padLeft(2, '0')}.${travel.startDate.day.toString().padLeft(2, '0')}';
+
     // 计算成员数量（创建者 + 参与者）
     final members = 1 + travel.participantIds.length;
-    
+
     return GestureDetector(
       onTap: () {
         Get.to(() => DefaultTabController(length: 3, child: TravelPage(travelPlanId: travel.id)));
@@ -159,12 +142,11 @@ class _TravelCard extends StatelessWidget {
                     Text(
                       travel.title,
                       style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      departureDate,
-                      style: const TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
+                    Text(departureDate, style: const TextStyle(color: Colors.grey, fontSize: 12)),
                     const SizedBox(height: 8),
                     Text(
                       '共${members}名成员',
@@ -174,21 +156,23 @@ class _TravelCard extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: 1,
-              height: 80,
-              color: Colors.grey.shade200,
-            ),
+            Container(width: 1, height: 80, color: Colors.grey.shade200),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('时长：$durationText', style: const TextStyle(fontSize: 12, color: Colors.deepOrange)),
-                    Text('里程：约${travel.totalDistance?.toStringAsFixed(1) ?? '0.0'}KM', style: const TextStyle(fontSize: 12, color: Colors.blue)),
+                    Text(
+                      durationText,
+                      style: const TextStyle(fontSize: 12, color: Colors.deepOrange),
+                    ),
+                    Text(
+                      '${travel.totalDistance?.toStringAsFixed(1) ?? '0.0'}KM',
+                      style: const TextStyle(fontSize: 12, color: Colors.blue),
+                    ),
                   ],
                 ),
               ),
@@ -198,4 +182,4 @@ class _TravelCard extends StatelessWidget {
       ),
     );
   }
-} 
+}
