@@ -150,11 +150,11 @@ class TravelPage extends StatelessWidget {
           );
         }
 
-        return CustomScrollView(
-          slivers: [
-            // 头部信息卡片
-            SliverToBoxAdapter(
-              child: Container(
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              // 头部信息卡片
+              Container(
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -448,23 +448,23 @@ class TravelPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            // 内容区域
-            Obx(() {
-              LogUtil.info('当前index: ${state.tabIndex.value}');
-              switch (state.tabIndex.value) {
-                case 0:
-                  return const TravelItineraryPage();
-                case 1:
-                  return const TravelBillPage();
-                case 2:
-                  return const TravelLuggagePage();
-                default:
-                  return const SizedBox.shrink();
-              }
-            }),
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
-          ],
+              // 内容区域
+              Obx(() {
+                LogUtil.info('当前index: ${state.tabIndex.value}');
+                switch (state.tabIndex.value) {
+                  case 0:
+                    return const TravelItineraryPage();
+                  case 1:
+                    return const TravelBillPage();
+                  case 2:
+                    return const TravelLuggagePage();
+                  default:
+                    return const SizedBox.shrink();
+                }
+              }),
+              const SizedBox(height: 20),
+            ],
+          ),
         );
       }),
     );

@@ -26,53 +26,48 @@ class TravelBillPage extends StatelessWidget {
       '其他': Icons.more_horiz,
     };
 
-    return SliverToBoxAdapter(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-            children:
-                bills.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final item = entry.value;
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 15,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Column(
+          children:
+              bills.asMap().entries.map((entry) {
+                final index = entry.key;
+                final item = entry.value;
 
-                  return Column(
-                    children: [
-                      Card(
-                        child: ListTile(
-                          leading: Icon(
-                            typeIcons[item['type']] ?? Icons.receipt,
-                            color: Colors.blue,
-                          ),
-                          title: Text(
-                            item['desc'] ?? '',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text('${item['type']} · ${item['date']}'),
-                          trailing: Text(
-                            '￥${item['amount'].toStringAsFixed(2)}',
-                            style: const TextStyle(fontSize: 16, color: Colors.red),
-                          ),
+                return Column(
+                  children: [
+                    Card(
+                      child: ListTile(
+                        leading: Icon(typeIcons[item['type']] ?? Icons.receipt, color: Colors.blue),
+                        title: Text(
+                          item['desc'] ?? '',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text('${item['type']} · ${item['date']}'),
+                        trailing: Text(
+                          '￥${item['amount'].toStringAsFixed(2)}',
+                          style: const TextStyle(fontSize: 16, color: Colors.red),
                         ),
                       ),
-                      if (index < bills.length - 1) const SizedBox(height: 12),
-                    ],
-                  );
-                }).toList(),
-          ),
+                    ),
+                    if (index < bills.length - 1) const SizedBox(height: 12),
+                  ],
+                );
+              }).toList(),
         ),
       ),
     );
